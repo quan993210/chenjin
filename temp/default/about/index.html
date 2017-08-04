@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="keywords" content="辰锦">
+<meta name="description" content="科技">
+<title>{$page_title}</title>
+<link rel="stylesheet" type="text/css" href="/css/base.css" />
+<link rel="stylesheet" type="text/css" href="/css/qh.css"/>
+<link rel="stylesheet" type="text/css" href="/css/style.css" />
+</head>
+ 
+<body>
+<div class="wrapper">
+{include file='common/top.html'} 
+<div class="newsBox1">
+  <div class="news1">
+    <ul class="we">
+      {if $ad1}
+      <li><a href="{$ad1[0].url}" ><img src="{$ad1[0].pic}" alt="{$ad1[0].title}" width="531" height="313"/></a></li>
+      {/if}
+      {if $ad2}
+      <li><a href="{$ad2[0].url}" ><img src="{$ad2[0].pic}" alt="{$ad2[0].title}" width="264" height="313"/></a></li>
+      {/if}
+      {if $ad3}
+      <li><a href="{$ad3[0].url}" ><img src="{$ad3[0].pic}" alt="{$ad3[0].title}" width="394" height="313"/></a></li>
+      {/if}
+    </ul>
+    <ul class="we">
+     {if $ad4}
+      <li><a href="{$ad4[0].url}" ><img src="{$ad4[0].pic}" alt="{$ad4[0].title}" width="531" height="313"/></a></li>
+      {/if}
+      {if $ad5}
+      <li><a href="{$ad5[0].url}" ><img src="{$ad5[0].pic}" alt="{$ad5[0].title}" width="264" height="313"/></a></li>
+      {/if}
+      {if $ad6}
+      <li><a href="{$ad6[0].url}" ><img src="{$ad6[0].pic}" alt="{$ad6[0].title}" width="394" height="313"/></a></li>
+      {/if}
+    </ul>
+    <div class="clear news2"></div>
+    <div class="ChenJin">
+       
+      <p>{$about.content}</p>
+    </div>
+  </div>
+</div>
+{include file='common/bottom.html'} 
+</div>
+<!--/wrapper-->
+</body>
+</html>

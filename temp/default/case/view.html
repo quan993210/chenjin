@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<title>{$page_title}</title><meta name="keywords" content="{$case.trade}"><meta name="description" content="{$case.brief}">
+<link rel="stylesheet" type="text/css" href="/css/base.css" />
+<link rel="stylesheet" type="text/css" href="/css/qh.css"/>
+<link rel="stylesheet" type="text/css" href="/css/style.css" />
+<link rel="stylesheet" type="text/css" href="/css/css.css" />
+<script type="text/javascript" src="/js/jquery.min.js"></script> 
+<script type="text/javascript" src="/js/common.js"></script> 
+<script type="text/javascript" src="/js/jquery.lazyload.js"></script> 
+<script type="text/javascript" src="/js/slides.min.jquery.js"></script>
+{literal}
+<script>
+$(function(){
+	$('#slides').slides({
+		preload: true,
+		preloadImage: '/images/loading.gif',
+		play: 5000,
+		pause: 2500,
+		hoverPause: true,
+		currentClass: 'cur'
+	});
+});
+</script>
+{/literal}
+</head>
+<body style="background-color:#222327">
+<!--wrapper-->
+<div class="productBox">
+  <div class="productLeft left">
+    <div style="width:320px;margin:0 auto">
+      <p class="productOne"><img src="{$case.logo}" alt="{$case.name}" width="180" height="180"></p>
+      <p class="productTitle">{$case.name}</p>
+      <p class="productNr"> {$case.brief} </p>
+      {if $case.is_apple}
+      <p class="apple"><img src="/images/apple.jpg" alt="{$case.title}IOS版" ></p>
+      {/if}
+      {if $case.is_android}
+      <p class="and"><img src="/images/and.jpg" alt="{$case.title}安卓版" ></p>
+      {/if}
+      <p class="productEwm"><img src="{$case.qrcode}" width="121" height="121" alt="{$case.title}二维码下载"></p>
+      <p><a href="javascript:void(0);" onClick="javascript :history.back(-1);"><img src="/images/zjt.jpg" alt=""/></a> 
+	  <a href="/case/" alt="南昌APP开发全部案例"><img src="/images/qbal.jpg" alt="南昌APP案例"/></a>　
+	  <a href="http://www.chenjin.cc" ><img src="/images/fhsy.jpg" alt="南昌APP开发首页"/></a> </p>
+    </div>
+  </div>
+  <div class="productRight" style="height:1055px;padding-top:0;background:{$case.bg_color};">
+    <div class="productRight right" style="height:1055px;padding-top:0;background:{$case.bg_color};">
+      <div id="container">
+        <div id="example">
+          <div id="slides">
+              <div class="slides_container"> 
+              {section name=loop loop=$case.pic_list}
+              {if $case.pic_list[loop]}
+              <img src="{$case.pic_list[loop]}" width="329" height="576" alt="Slide {$smarty.section.loop.index + 1}"> 
+              {/if}
+              {/section}
+              </div>
+              <a href="javascript:void(0);" class="prev"> </a> <a href="javascript:void(0);" class="next"> </a> 
+              </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="clear"></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,4 @@
+﻿关卡,关卡类名,标题,简介,胜利分享文案,失败求助文案,提示1,提示2,提示3
+level,className,title,desc,winShareWord,helpWord,tips1,tips2
+1,关卡1,标题1,desc1,胜利分享1,求助文案1,提示1,提示2
+2,关卡2,标题2,desc2,胜利分享2,求助文案2,提示1,提示2

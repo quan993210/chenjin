@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<title>{$page_title}</title>
+<!--<meta name="keywords" content="{$article.title}"/>
+<meta name="description" content="{$article.content}"/>-->
+<link rel="stylesheet" type="text/css" href="/css/base.css">
+<link rel="stylesheet" type="text/css" href="/css/qh.css">
+<link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+{literal}
+<style>
+.casebox {
+	background:#EFEFEF;
+	padding-top:39px;
+	padding-bottom:50px;
+	font-family:"微软雅黑"
+}
+.casescrap {
+	background:#fff;
+	width:983px;
+	margin-left:auto;
+	margin-right:auto;
+	border:solid 1px #DADADA;
+	padding:86px 93px 0px 122px;
+}
+.casescrap .title {
+	font-size:26px;
+	font-weight:bold;
+	margin-bottom:8px
+}
+.casescrap .brief {
+	font-size:15px;
+	line-height:29px;
+	margin-bottom:0px
+}
+ .casescrap .brief img{display:block;}
+</style>
+{/literal}
+<body>
+{include file='common/top.html'} 
+<div class="wrapper">
+ 
+<div class="casebox">
+  <div class="casescrap">
+    <p class="title">{$article.title}</p>
+    <div class="brief">{$article.content}</div>
+  </div>
+</div>
+{include file='common/bottom.html'}  
+</div>
+<!--/wrapper-->
+</body>
+</html>

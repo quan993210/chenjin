@@ -1,0 +1,29 @@
+{
+    "project_type": "javascript",
+
+    "debugMode" : 1,
+    "showFPS" : true,
+    "frameRate" : 60,
+    "noCache" : false,
+    "id" : "gameCanvas",
+    "renderMode" : 1,
+    "engineDir":"frameworks/cocos2d-html5",
+
+    "modules" : ["cocos2d","extensions","cocostudio"],
+
+    "jsList" : [
+        "src/Systerm/resource.js",
+        "src/Systerm/app.js",
+        "src/View/Loading_View.js",
+        "src/View/LoginLayer.js",
+        "src/View/GameLayer.js",
+        "src/View/GameFinishLayer.js",
+        "src/View/GameTipLayer.js",
+        "src/View/GameRankLayer.js",
+        "src/View/jx.js",
+        "src/View/GameFloatLayer.js",
+        "src/GameSystem/new_Brick.js",
+        "src/GameSystem/new_BrickSystem.js"
+
+    ]
+}

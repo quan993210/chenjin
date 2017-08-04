@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <title>{$case.name}</title>
+  <link rel="stylesheet" type="text/css" href="/css/normalize.css" />
+  <link rel="stylesheet" type="text/css" href="/css/default.css">
+  <link rel="stylesheet" type="text/css" href="/css/styles.css"> {literal}
+  <style>
+    a {
+      color: #fff
+    }
+    
+    #layer-box {
+      display: none;
+      position: absolute;
+      top: 0%;
+      left: 0%;
+      width: 100%;
+      height: 100%;
+      background-color: black;
+      z-index: 1001;
+      -moz-opacity: 0.85;
+      opacity: .85;
+      filter: alpha(opacity=85);
+    }
+     #layer-box p:first-child{text-align: right;margin:0 15px}
+    #layer-box p:last-child{color:#fff;text-align: center;font-size:16px;margin:15px}
+  </style>
+  {/literal}
+</head>
+
+<body>
+  <div class="cont">
+    <div class="demo">
+      <div class="login">
+        <div class="login__check"> <img src="{$case.logo}" width="100" /> </div>
+        <div class="login__form">
+          <p class="titlebars">
+            <!--<img src="images/qyb.jpg" width="70px"/>-->{$case.name}</p>
+          <p class="xz-content"> {$case.brief} </p>
+          {if $is_weixin}
+          <p><img src="/images/xzaz.jpg" width="200" id="layer" onClick="showdiv();" /></p>
+          {else}
+          {if $device_type eq 'ios' && $case.is_apple}
+          <p ><a href="{$case.apple_down_url}"><img src="/images/xzaz.jpg" width="200"/></a></p>
+          {/if}
+          {if $device_type eq 'android' && $case.is_android}
+          <p ><a href="{$case.android_down_url}"><img src="/images/xzaz.jpg" width="200"/></a></p>
+          {/if}
+		  {/if}
+          <!-- <p class="tips">
+            <span style="text-align:left">温馨提示：</span>
+            <br> 如果您是用微信扫描，请点击右上角菜单中的在浏览器中打开并下载!
+          </p> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="layer-box" onClick="hidediv();">
+    <p><img src="/images/share.png" width="100%"></p>
+    <!-- <p>请点击右上角菜单中的在浏览器中打开并下载</p> -->
+  </div>
+  {literal}
+  <script language="javascript" type="text/javascript">
+    function showdiv() {
+      document.getElementById("layer-box").style.display = "block";
+
+    }
+
+    function hidediv() {
+      document.getElementById("layer-box").style.display = 'none';
+
+    }
+  </script>
+  {/literal}
+</body>
+
+</html>

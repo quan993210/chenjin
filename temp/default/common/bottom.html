@@ -1,0 +1,52 @@
+<!--footer-->
+<div class="footer {if $menu neq 'index'}footer2{/if}">
+  <div class="container">
+    <div class="footerTop">
+      <div class="footerLogo left"> <a title="南昌微信小程序开发,南昌市辰锦网络科技有限公司" href="http://www.chenjin.cc"><img src="/images/footerlogo.jpg"></a> </div>
+      <div class="lx left">
+        <p class="wf">关于辰锦</p>
+        <ul>
+          <li> <a href="http://www.chenjin.cc" title="南昌微信小程序开发、APP开发首页"> 网站首页 </a>
+          </li>
+          <li> <a href="/about/" title="南昌微信小程序、APP开发团队介绍"> 关于我们 </a>
+          </li>
+          <li> <a href="/case/" title="南昌微信小程序、APP品牌案例"> 品牌案例 </a>
+          </li>
+          <li> <a href="http://wangzhankf.com" title="南昌网站开发"> 网站开发 </a>
+          </li>
+        </ul>
+      </div>
+      <div class="qq-zx left">
+        <p class="wf">联系我们</p>
+        <p style="margin-bottom:3px">QQ:250686110</p>
+        <p class="qq2"><a target="_blank" href="http://wpa.qq.com/msgrd?v=3&amp;uin=250686110&amp;site=qq&amp;menu=yes"></a></p>
+        <p style="margin-bottom:3px">QQ:578210654</p>
+        <p class="qq1"><a target="_blank" href="http://wpa.qq.com/msgrd?v=3&amp;uin=578210654&amp;site=qq&amp;menu=yes"></a></p>
+      </div>
+      <div class="tell right">
+        <div class="tel"> <img src="/images/tel.jpg" alt="南昌APP开发电话:4006631655"> </div>
+        <p style="text-align:right;margin-bottom:8px;">地址：南昌市北京东路东方银座1单元2104室</p>
+        <p style="padding-left:38px;">邮箱：jnknet@126.com</p>
+      </div>
+    </div>
+    <div class="yqlj" style="line-height:25px;"> 
+    <b>友情链接</b>&nbsp;&nbsp; 
+    {section name=loop loop=$link}
+    <a href="{$link[loop].url}" target="_blank">{$link[loop].title}</a>&nbsp;&nbsp; 
+    {/section}
+    </div>
+    <div id="copy"><span class="copy">COPYRIGHT © 2012-2016 <a href="http://www.chenjin.cc">辰锦科技</a>. All Rights Reserved. 版权所有<a target="_blank" href="http://www.miitbeian.gov.cn/">赣ICP备12005825号-1</a>  &nbsp;</span></div>
+  </div>
+  <div class="clear"></div>
+  <div id="static_Login">
+    <div class="qrcodeBox">
+      <div class="qrcodeCom"><a class="zx" href="javascript:void(0);"><img src="/images/qd.png"></a></div>
+      <div class="qrcodeCom"><a class="manq" target="_blank" href="http://wpa.qq.com/msgrd?v=3&amp;uin=250686110&amp;site=qq&amp;menu=yes"></a></div>
+      <div class="qrcodeCom"><a class="feq" target="_blank" href="http://wpa.qq.com/msgrd?v=3&amp;uin=578210654&amp;site=qq&amp;menu=yes"></a></div>
+      <div class="qrcodeCom">
+        <p id="del"  onclick="document.getElementById('static_Login').style.display='none';jQuery('#footerN').css('marginBottom',0);jQuery('.footer').css('height',350)"></p>
+      </div>
+    </div>
+  </div>
+</div>
+<!--/footer-->

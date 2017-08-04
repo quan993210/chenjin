@@ -1,0 +1,11 @@
+        {section name=loop loop=$article}
+        <li>
+          <div class="left"> <a href="/article/view.php?id={$article[loop].id}"> <img data-original="{$article[loop].pic}" class="lazy" /> </a> </div>
+          <div class="newsAll right">
+            <p class="newsTitle"> <a href="/article/view.php?id={$article[loop].id}"> {$article[loop].title}</a>
+            <p>
+            <p class="newsNr"> <a href="/article/view.php?id={$article[loop].id}">{$article[loop].brief}</a></p>
+            <p class="time">发布者：{$article[loop].author}  发布日期：{$article[loop].add_time|truncate:10:''}</p>
+          </div>
+        </li>
+        {/section}

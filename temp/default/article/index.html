@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<title>{$page_title}</title><meta name="keywords" content="南昌APP开发最新动态"><meta name="description" content="南昌APP开发最新合作动态,包含多个公司合作情况说明">
+<link rel="stylesheet" type="text/css" href="/css/base.css" />
+<link rel="stylesheet" type="text/css" href="/css/qh.css"/>
+<link rel="stylesheet" type="text/css" href="/css/style.css" />
+<script type="text/javascript" src="/js/jquery.js"></script> 
+<script type="text/javascript" src="/js/common.js"></script> 
+<script type="text/javascript" src="/js/jquery.lazyload.js"></script>
+{literal}
+<script>
+var is_load = true;
+$(function(){
+	$("#now_page").val("1");
+	$(window).scroll(function(){
+			// 当滚动到最底部以上50像素时， 加载新内容
+		if ($(document).height() - $(this).scrollTop() - $(this).height() < 50 && is_load){
+			ajax_get_data();
+		}
+	});
+});
+
+function ajax_get_data()
+{
+	is_load = false;
+	
+	var type = $("#pic_type").val();
+	var page = parseInt($("#now_page").val());
+	page = page + 1;
+		
+	$.post(
+			"/article/",
+			{action : "ajax_get_data", page : page},
+			function(data){
+				if (data == "")return;
+				
+				$("#now_page").val(page);
+				$('#news_list').append(data);
+				$("img.lazy").lazyload();	
+				
+				is_load = true;			
+			}
+	);
+}
+</script>
+{/literal}
+</head>
+
+<body>
+<!--wrapper-->
+<div class="wrapper"> 
+  
+  {include file='common/top.html'} 
+  <div class="newsBox">
+    {if $ad}
+    <div class="banner"> <img src="{$ad[0].pic}" width="100%" height="359"> </div>
+    {/if}
+    <div class="news">
+      <ul id="news_list">
+        {section name=loop loop=$article}
+        <li>
+          <div class="left"> <a href="/article/view.php?id={$article[loop].id}"> <img data-original="{$article[loop].pic}" alt="{$article[loop].title}" class="lazy" /> </a> </div>
+          <div class="newsAll right">
+            <p class="newsTitle"> <a href="/article/view.php?id={$article[loop].id}"> {$article[loop].title}</a>
+            <p>
+            <p class="newsNr"> <a href="/article/view.php?id={$article[loop].id}">{$article[loop].brief}</a></p>
+            <p class="time">发布者：{$article[loop].author}  发布日期：{$article[loop].add_time|truncate:10:''}</p>
+          </div>
+        </li>
+        {/section}
+      </ul>
+      <input type="hidden" id="now_page" value="1" />
+      <div class="clear"></div>
+    </div>
+  </div>
+  
+  {include file='common/bottom.html'}   
+</div>
+
+<!--/wrapper-->
+
+</body>
+</html>
