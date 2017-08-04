@@ -71,6 +71,10 @@ function menu()
 	$sub[]  = array('url' => 'ads_category.php', 		'name' => '广告分类');
 	$sub[]  = array('url' => 'ads.php', 				'name' => '广告列表');
 	$menu[] = array('name' => '广告管理', 				'sub' => $sub);
+
+	unset($sub);
+	$sub[]  = array('url' => 'merchant.php', 				'name' => '商户列表');
+	$menu[] = array('name' => '商户管理', 				'sub' => $sub);
 	
 	$smarty->assign('menu', $menu);
 	$smarty->display('common/menu.htm');

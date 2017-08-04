@@ -252,7 +252,7 @@ function get_case($page = 1, $page_size = 4, $is_index = 0)
 	global $db;
 	
 	//$con   = 'WHERE is_pub = 1';
-	$con   .= $is_index != 0 ? ' WHERE is_index = 1 ' : '';
+	$con   = $is_index != 0 ? ' WHERE is_index = 1 ' : '';
 	$start = ($page - 1) * $page_size;	
 	
 	$sql = "SELECT * FROM product {$con} ORDER BY order_num DESC, add_time DESC LIMIT {$start}, {$page_size}";
