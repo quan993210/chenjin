@@ -185,14 +185,9 @@ function mod_merchant()
     $merchant = $db->get_row($sql);
     $smarty->assign('merchant', $merchant);
     $smarty->assign('url_path', URL_PATH);
-    //案例分类
-   // $smarty->assign('merchant_category', get_merchant_category());
-
-    $smarty->assign('pic_list', explode('|', $merchant['pics']));
-
     $smarty->assign('now_page', irequest('now_page'));
     $smarty->assign('action', 'do_mod_merchant');
-    $smarty->assign('page_title', '修改案例');
+    $smarty->assign('page_title', '修改商户');
     $smarty->display('merchant/merchant.htm');
 }
 
@@ -206,51 +201,34 @@ function do_mod_merchant()
     $id 	  	= irequest('id');
     $name    	= crequest('name');
     $brief    	= crequest('brief');
-    $trade    	= crequest('trade');
-    $bg_color   = crequest('bg_color');
-    $is_index 	= irequest('is_index');
-    $is_apple 	= irequest('is_apple');
-    $is_android = irequest('is_android');
+    $captain    	= crequest('captain');
+    $phone   = irequest('phone');
+    $address 	= crequest('address');
+    $gold 	= irequest('gold');
+    $rank = irequest('rank');
+    $logo 	= crequest('logo_path');
+    $addtime	= now_time();
 
-    $apple_down_url   = crequest('apple_down_url');
-    $android_down_url = crequest('android_down_url');
+    check_null($name  	,   '商户名称');
+    check_null($captain  	,   '商户联系人');
+    check_null($phone  	,   '联系人电话');
+    check_null($gold  	,   '可领取金币');
 
-    $pic_path 	= crequest('pic_path');
-    $logo_path 	= crequest('logo_path');
-    $qrcode_path= crequest('qrcode_path');
-    $pics 	    = crequest('pics_path');
-    $order_num 	= irequest('order_num');
-    $is_pub 	= irequest('is_pub');
-
-    check_null($name  	,   '案例名称');
 
     $sql = "UPDATE merchant SET "
         . "name = '{$name}', "
         . "brief = '{$brief}', "
-        . "trade = '{$trade}', "
-        . "bg_color = '{$bg_color}', "
-        . "is_index = '{$is_index}', "
-        . "is_apple = '{$is_apple}', "
-        . "is_android = '{$is_android}', "
-        . "pic = '{$pic_path}', "
-        . "logo = '{$logo_path}', "
-        . "qrcode = '{$qrcode_path}', "
-        . "pics = '{$pics}', "
-        . "order_num = '{$order_num}', "
-        . "apple_down_url = '{$apple_down_url}', "
-        . "android_down_url = '{$android_down_url}', "
-        . "is_pub = '{$is_pub}' "
+        . "captain = '{$captain}', "
+        . "phone = '{$phone}', "
+        . "address = '{$address}', "
+        . "gold = '{$gold}', "
+        . "rank = '{$rank}', "
+        . "logo = '{$logo}', "
+        . "addtime = '{$addtime}' "
         . "WHERE id = '{$id}'";
     $db->query($sql);
 
-    unset($_SESSION['case_pic_img']);
     unset($_SESSION['case_logo_img']);
-    unset($_SESSION['case_qrcode_img']);
-    unset($_SESSION['case_pics_img']);
-
-    $aid  = $_SESSION['admin_id'];
-    $text = '修改案例，修改案例ID：' . $id;
-    operate_log($aid, 'merchant', 2, $text);
 
     $now_page = irequest('now_page');
     $url_to = "merchant.php?action=list&page={$now_page}";
@@ -265,24 +243,12 @@ function del_merchant()
     global $db;
 
     $id = irequest('id');
-    $sql = "SELECT pic, logo, qrcode, pics FROM merchant WHERE id = '{$id}'";
+    $sql = "SELECT logo FROM merchant WHERE id = '{$id}'";
     $row = $db->get_row($sql);
-    del_img($row['pic']);
     del_img($row['logo']);
-    del_img($row['qrcode']);
-
-    $pic_arr = explode('|', $row['pics']);
-    foreach ($pic_arr as $val)
-    {
-        del_img($val);
-    }
 
     $sql = "DELETE FROM merchant WHERE id = '{$id}'";
     $db->query($sql);
-
-    $aid  = $_SESSION['admin_id'];
-    $text = '删除案例，删除案例ID：' . $id;
-    operate_log($aid, 'merchant', 3, $text);
 
     $now_page = irequest('now_page');
     $url_to = "merchant.php?action=list&page={$now_page}";
@@ -299,28 +265,15 @@ function del_sel_merchant()
     $id = crequest('checkboxes');
     if (empty($id))alert_back('请选中需要删除的选项');
 
-    $sql = "SELECT pic, logo, qrcode, pics FROM merchant WHERE id IN ({$id})";
+    $sql = "SELECT logo FROM merchant WHERE id IN ({$id})";
     $imgs_all = $db->get_all($sql);
-    for ($i = 0; $i < count($imgs_all); $i++)
-    {
-        del_img($imgs_all[$i]['pic']);
+    for ($i = 0; $i < count($imgs_all); $i++) {
         del_img($imgs_all[$i]['logo']);
-        del_img($imgs_all[$i]['qrcode']);
-
-        unset($pic_arr);
-        $pic_arr = explode('|', $imgs_all[$i]['pics']);
-        foreach ($pic_arr as $val)
-        {
-            del_img($val);
-        }
     }
 
     $sql = "DELETE FROM merchant WHERE id IN ({$id})";
     $db->query($sql);
 
-    $aid  = $_SESSION['admin_id'];
-    $text = '批量删除案例，批量删除案例ID：' . $id;
-    operate_log($aid, 'merchant', 4, $text);
 
     $now_page = irequest('now_page');
     $url_to = "merchant.php?action=list&page={$now_page}";
