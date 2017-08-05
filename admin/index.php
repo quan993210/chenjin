@@ -75,6 +75,10 @@ function menu()
 	unset($sub);
 	$sub[]  = array('url' => 'merchant.php', 				'name' => '商户列表');
 	$menu[] = array('name' => '商户管理', 				'sub' => $sub);
+
+	unset($sub);
+	$sub[]  = array('url' => 'gift.php', 				'name' => '礼品列表');
+	$menu[] = array('name' => '礼品管理', 				'sub' => $sub);
 	
 	$smarty->assign('menu', $menu);
 	$smarty->display('common/menu.htm');
