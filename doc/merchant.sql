@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `merchant` (
   `address` varchar(200) NOT NULL COMMENT '地址',
   `gold` int(11) NOT NULL COMMENT '可领取金币',
   `rank` int(11) NOT NULL COMMENT '排序',
-  `addtime` int(11) NOT NULL,
+  `addtime` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='商户表' AUTO_INCREMENT=9 ;
 
