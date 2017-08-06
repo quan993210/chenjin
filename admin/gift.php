@@ -7,7 +7,7 @@
  */
 set_include_path(dirname(dirname(__FILE__)));
 include_once("inc/init.php");
-if (!session_id()) session_start();
+session_start();
 
 $action = crequest("action");
 $action = $action == '' ? 'list' : $action; 
