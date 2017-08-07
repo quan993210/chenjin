@@ -37,6 +37,6 @@ define('SYS_NAME', '辰锦网站后台管理');
 define('APPID', 'wx1cd6a5f3c2607cc9');
 define('APPSECRET', 'e27a06b9bc4303efd7f583839ca2c389');
 //微信回调地址，要跟公众平台的配置域名相同
-define('INDEX_URL', 'http://chenjin.com/weixin/view.php?');
+define('INDEX_URL', 'http://tongwanjie.famishare.net/ChildrenDay/');
 
 ?>

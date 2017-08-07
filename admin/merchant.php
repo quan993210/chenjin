@@ -35,21 +35,6 @@ switch ($action)
     case "del_sel_merchant":
         del_sel_merchant();
         break;
-    case "cat_list":
-        cat_list();
-        break;
-    case "add_cat":
-        add_cat();
-        break;
-    case "do_add_cat":
-        do_add_cat();
-        break;
-    case "del_cat":
-        del_cat();
-        break;
-    case "del_sel_cat":
-        del_sel_cat();
-        break;
     case "del_one_img":
         del_one_img();
         break;

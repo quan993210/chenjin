@@ -5,25 +5,49 @@
  * Date: 2017/8/6 0006
  * Time: 22:16
  */
+//http://tongwanjie.famishare.net/ChildrenDay/
 set_include_path(dirname(dirname(__FILE__)));
-include_once("inc/init.php");
+include_once("/inc/init.php");
 session_start();
-
+global $db;
 if (!$_SESSION['openid']) {                             //如果$_SESSION中没有openid，说明用户刚刚登陆，就执行getCode、getOpenId、getUserInfo获取他的信息
     $code = getCode();
     $access_token = getOpenId($code);
     $userInfo = getUserInfo();
     print_r($userInfo);
     if ($userInfo) {
-        $userInfo = '{    "openid":" OPENID",  " nickname": NICKNAME,   "sex":"1",   "province":"PROVINCE"    "city":"CITY", "country":"COUNTRY",    "headimgurl":    "http://wx.qlogo.cn/mmopen/g3MonUZtNHkdmzicIlibx6iaFqAc56vxLSUfpb6n5WKSYVY0ChQKkiaJSgQ1dZuTOgvLLrhJbERQQ4eMsv84eavHiaiceqxibJxCfHe/46",
-"privilege":[ "PRIVILEGE1" "PRIVILEGE2"     ], "unionid": "o6_bmasdasdsad6_2sgVt7hMZOPfL" } ';
+/*        $userInfo = '{    "openid":" OPENID",  " nickname": NICKNAME,   "sex":"1",   "province":"PROVINCE"    "city":"CITY", "country":"COUNTRY",    "headimgurl":    "http://wx.qlogo.cn/mmopen/g3MonUZtNHkdmzicIlibx6iaFqAc56vxLSUfpb6n5WKSYVY0ChQKkiaJSgQ1dZuTOgvLLrhJbERQQ4eMsv84eavHiaiceqxibJxCfHe/46",
+"privilege":[ "PRIVILEGE1" "PRIVILEGE2"     ], "unionid": "o6_bmasdasdsad6_2sgVt7hMZOPfL" } ';*/
+
+
+        $sql = "SELECT * FROM " . PREFIX . "member WHERE openid = '{$userInfo['openid']}'";
+        $member = $db->get_row($sql);
+        if($member){
+            $nickname    	= $userInfo['nickname'];
+            $headimgurl    	= $userInfo['headimgurl'];
+            $receive       = $member['receive']+1;
+            $sql = "UPDATE member SET nickname = '{$nickname}',headimgurl = '{$headimgurl}',receive = '{$receive}' WHERE openid = '{$openid}'";
+            $db->query($sql);
+        }else{
+            $username    	= "wx_".time();
+            $nickname    	= $userInfo['nickname'];
+            $openid    	= $userInfo['openid'];
+            $headimgurl    	= $userInfo['headimgurl'];
+            $unionid    	= $userInfo['unionid'];
+            $password    	= md5(123456);
+            $receive       = 1;
+            $ip    	= real_ip();
+            $add_time	= now_time();
+            $sql = "INSERT INTO member (username, nickname, openid, headimgurl, unionid, password, receive, ip, add_time) VALUES ('{$username}', '{$nickname}', '{$openid}', '{$headimgurl}', '{$unionid}', '{$password}', '{$receive}', '{$ip}', '{$add_time}')";
+            $db->query($sql);
+        }
+
         session('openid', $userInfo['openid']);         //写到$_SESSION中。微信缓存很坑爹，调试时请及时清除缓存再试。
     }
 }
 
 
 /*请求URL，返回 ACCESS_TOKEN*/
-//TODO 需要优化
 function get_access_token(){
     // access_token 应该全局存储与更新，以下代码以写入到文件中做示例
     $data = json_decode($this->get_php_file("access_token.php"));
