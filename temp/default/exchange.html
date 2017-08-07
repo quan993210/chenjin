@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
+  <title>礼品兑换</title>
+  <link rel="stylesheet" type="text/css" href="css/common.css">
+  <style>
+    .bg {
+      background-color: rgba(0, 0, 0, .6);
+      height: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+    }
+
+    .fail {
+      background-color: #fff;
+      width: 8rem;
+      height: 3.866667rem;
+      border-radius: .133333rem;
+      margin: 0 auto;
+      position: relative;
+      overflow: hidden;
+      margin-top: 3.066667rem;
+    }
+
+    .fail .title {
+      font-size: .453333rem;
+      margin-top: .56rem;
+      margin-bottom: .4rem;
+      color: #000000;
+      text-align: center;
+    }
+
+    .fail .tip-text {
+      color: #999999;
+      text-align: center;
+      font-size: .373333rem;
+    }
+
+    .fail .btn-group {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 1.333333rem;
+      border-top: 1px solid #d3d3d5;
+      display: flex;
+    }
+
+    .btn-group a {
+      width: 50%;
+      text-align: center;
+      font-size: .453333rem;
+      height: 1.333333rem;
+      line-height: 1.333333rem;
+    }
+
+    a.cancel {
+      border-right: 1px solid #d3d3d5;
+      color: #000000;
+    }
+
+    a.share {
+      color: #fd0158;
+    }
+  </style>
+</head>
+<body>
+  <div class="exchange tip">
+    <div class="intro">
+      <img src="images/thumb.png" alt="" class="thumb">
+      <p class="product-name">美赞成荷兰铂金版1段婴儿奶粉400g*1罐</p>
+      <p class="coin"><span class="coin-num">2000</span>宝宝币</p>
+      <a href="success.html" class="btn btn-exchange">兑换</a>
+    </div>
+  </div>
+  <!-- 兑换失败时提示 -->
+  <div class="bg">
+    <div class="fail">
+      <h2 class="title">提示</h2>
+      <p class="tip-text">您的宝宝币不足，分享可获得更多领取机会</p>
+      <div class="btn-group">
+        <a href="javascript:;" class="cancel">取消</a>
+        <a href="javascript:;" class="share">去分享</a>
+      </div>
+    </div>
+  </div>
+  <script src="js/common.js"></script>
+  <script>
+    window.onload = function () {
+      let tip = document.querySelector('.bg'),
+          cancelBtn = document.querySelector('.cancel')
+      addEvent(cancelBtn, 'click', () => {
+        tip.style.display = 'none'
+      })
+    }
+  </script>
+</body>
+</html>

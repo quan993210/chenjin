@@ -1,0 +1,57 @@
+.list {
+  width: 100%;
+  overflow: hidden;
+  background-color: #f3f3f3;
+}
+
+.list .rules {
+  height: 5.133333rem;
+  background: url('../images/bg2.png') no-repeat;
+  background-size: 100%;
+  background-position: left bottom;
+  overflow: hidden;
+}
+
+.list .rule-item {
+  margin-bottom: .266667rem;
+  color: #555555;
+}
+
+.product {
+  margin-top: .266667rem;
+  background: #fff;
+  margin-bottom: .8rem;
+}
+
+.product-item a {
+  display: flex;
+  align-items: center;
+  height: 3.733333rem;
+  width: 9.2rem;
+  margin: 0 auto;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.product-item .thumb {
+  width: 2.933333rem;
+  height: 2.933333rem;
+  margin-right: .4rem;
+}
+
+.product-item .intro .product-name {
+  font-size: .4rem;
+  color: #414141;
+  margin-bottom: .133333rem;
+}
+
+.product-item .intro .customer-name {
+  font-size: .373333rem;
+  color: #555555;
+  margin-bottom: .266667rem;
+}
+
+.product-item .intro .coin {
+  font-size: .346667rem;
+  color: #ff0058;
+}
+
