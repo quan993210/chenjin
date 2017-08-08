@@ -70,7 +70,7 @@
 	{section name=loop loop=$gift_list}
 		<tr align="center">
 		  <td><span><input name="checkboxes[]" type="checkbox" value="{$gift_list[loop].id}" />{$gift_list[loop].id}</span></td>
-		  <td><img src="{if $gift_list[loop].image neq ''}{$url_path}{$gift_list[loop].image}{else}{$url_path}/images/footerlogo.png{/if}" style="width: 50px;height: 50px" /></td>
+		  <td><img src="{if $gift_list[loop].image neq ''}{$gift_list[loop].image}{else}{$url_path}/images/footerlogo.png{/if}" style="width: 50px;height: 50px" /></td>
 		  <td>{$gift_list[loop].name}</span></td>
           <td>{$gift_list[loop].brief}</td>
           <td>{$gift_list[loop].buy_gold}</td>

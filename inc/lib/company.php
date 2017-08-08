@@ -290,7 +290,7 @@ function upload_batch_photo()
 {
 	$upload_name = crequest('upload_name');
 	$dir_type    = crequest('dir_type');
-	$targetDir   = $_SERVER['DOCUMENT_ROOT'] . '/upload/' . $dir_type . '/' . date('ym') . '/';
+	$targetDir   = $_SERVER['DOCUMENT_ROOT'] . '/ChildrenDay/upload/' . $dir_type . '/' . date('ym') . '/';
 	
 	$cleanupTargetDir = true; // Remove old files
 	$maxFileAge = 5 * 3600; // Temp file age in seconds
@@ -308,7 +308,7 @@ function upload_batch_photo()
 	
 	$fileName = date('YmdHis') . rand(1000, 9999) . $file_type;		
 	$filePath = $targetDir . $fileName;
-	$pic_path = '/upload/' . $dir_type . '/' . date('ym') . '/' . $fileName;
+	$pic_path = '/ChildrenDay/upload/' . $dir_type . '/' . date('ym') . '/' . $fileName;
 	
 	// Chunking might be enabled
 	$chunk = isset($_REQUEST["chunk"]) ? intval($_REQUEST["chunk"]) : 0;
