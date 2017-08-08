@@ -83,7 +83,6 @@ function getCode(){
     } else {
         $str = "location: https://open.weixin.qq.com/connect/oauth2/authorize?appid=" . APPID . "&redirect_uri=" . INDEX_URL . "&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect";
         header($str);
-
         exit;
     }
 }

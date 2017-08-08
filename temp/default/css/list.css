@@ -5,11 +5,12 @@
 }
 
 .list .rules {
-  height: 5.133333rem;
   background: url('../images/bg2.png') no-repeat;
+  background-color: #fff;
   background-size: 100%;
   background-position: left bottom;
   overflow: hidden;
+  padding-bottom: .8rem;
 }
 
 .list .rule-item {

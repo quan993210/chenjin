@@ -8,6 +8,7 @@
   <title>夏季童玩节</title>
   <link rel="stylesheet" type="text/css" href="/ChildrenDay/temp/default/css/common.css">
   <link rel="stylesheet" type="text/css" href="/ChildrenDay/temp/default/css/index.css">
+  <link rel="stylesheet" type="text/css" href="/ChildrenDay/temp/default/css/list.css">
 </head>
 <body>
   <div class="home">
@@ -18,69 +19,54 @@
       <div class="rules-row">
         <div class="box">
           <div class="left">
-            <i class="icon icon-coin"></i>
-            <span>宝宝币</span>
-            <span>{$member.gold}</span>
+            <img src="/ChildrenDay/temp/default/images/avatar.png" alt="" class="avatar">
+            <span class="name">杨思雨</span>
           </div>
           <div class="right">
-            <a href="list.html" class="btn btn-exchange">可兑换礼品<span>99</span>件</a>
+            <i class="icon icon-coin"></i>
+            <span>宝宝币</span>
+            <span class="coin-num">8888</span>
           </div>
         </div>
-        <div class="rules">
-          <h2>领取宝宝币规则</h2>
-          <ol class="rule-list">
-            <li class="rule-item">活动时间： 2017年8月2日至2017年8月22日24:00</li>
-            <li class="rule-item">每人每天可领取一次赞助商家宝宝币</li>
-            <li class="rule-item">每成功分享一位好友关注后，可多获得一次领取机会，多分享多领取</li>
-          </ol>
+        <div class="product">
+          <h2>宝宝币换礼品</h2>
+          <ul class="product-list">
+            {section name=loop loop=$gift}
+            <li class="product-item">
+              <a href="weixin/exchange.php?id={$gift[loop].id}">
+                <img src="{$gift[loop].image}" alt="" class="thumb">
+                <div class="intro">
+                  <h3 class="product-name">{$gift[loop].name}</h3>
+                  <p class="customer-name">{$gift[loop].merchant_name}</p>
+                  <p class="coin"><span class="coin-num">{$gift[loop].buy_gold}</span>宝宝币</p>
+                </div>
+              </a>
+            </li>
+            {/section}
+          </ul>
+          <a href="weixin/exchange.php" class="btn btn-more">查看更多可兑换礼品</a>
         </div>
       </div>
     </header>
     <div class="container">
       <h2 class="title">合作商家</h2>
       <ul class="customer-list">
+        {section name=loop loop=$merchant}
         <li class="customer-item">
-          <img src="/ChildrenDay/temp/default/images/logo.png" alt="" class="logo">
-          <h3 class="name">妈妈应用官方平台</h3>
-          <a href="javascript:void (0)" class="btn btn-get geted">
+          <img src="{$merchant[loop].logo}" alt="" class="logo">
+          <h3 class="name">{$merchant[loop].name}</h3>
+          <a href="javascript:;" class="btn btn-get">
             <i class="icon icon-coin-mini"></i>
-            100x2
-            <!-- <span class="multiple">2</span> -->
+            {$merchant[loop].gold}x2
           </a>
         </li>
-        <li class="customer-item">
-          <img src="/ChildrenDay/temp/default/images/logo.png" alt="" class="logo">
-          <h3 class="name">妈妈应用官方平台</h3>
-          <a href="javascript:void (0)" class="btn btn-get">
-            <i class="icon icon-coin-mini"></i>
-            100x2
-            <!-- <span class="multiple">2</span> -->
-          </a>
-        </li>
-        <li class="customer-item">
-          <img src="/ChildrenDay/temp/default/images/logo.png" alt="" class="logo">
-          <h3 class="name">妈妈应用官方平台</h3>
-          <a href="javascript:void (0)" class="btn btn-get">
-            <i class="icon icon-coin-mini"></i>
-            100x2
-            <!-- <span class="multiple">2</span> -->
-          </a>
-        </li>
-        <li class="customer-item">
-          <img src="/ChildrenDay/temp/default/images/logo.png" alt="" class="logo">
-          <h3 class="name">妈妈应用官方平台</h3>
-          <a href="javascript:void (0)" class="btn btn-get">
-            <i class="icon icon-coin-mini"></i>
-            100x2
-            <!-- <span class="multiple">2</span> -->
-          </a>
-        </li>
+        {/section}
       </ul>
     </div>
   </div>
   <div class="share">
     <div class="bg">
-      <a href="javascript:void (0)" class="btn btn-share">好的</a>
+      <a href="javascript:;" class="btn btn-share">好的</a>
     </div>
   </div>
   <div class="get">
@@ -89,8 +75,15 @@
       <img class="coin-max" src="/ChildrenDay/temp/default/images/coin-max.png" />
     </div>
   </div>
-  <audio class="music" src="/ChildrenDay/temp/default/music/gold.mp3">
-  </audio>
+  <div class="modules">
+    <form action="/ChildrenDay/temp/default/list.html">
+      <h2>填写信息</h2>
+      <input id="name" type="text" name="name" value="" placeholder="您的名字"/>
+      <input id="mobile" type="text" name="mobile" value="" placeholder="您的手机号码"/>
+      <input class="btn-sub" type="submit" name="submit" value="提交">
+    </form>
+  </div>
+  <audio class="music" src="/ChildrenDay/temp/default/music/gold.mp3"></audio> 
   <script src="/ChildrenDay/temp/default/js/common.js"></script>
   <script src="/ChildrenDay/temp/default/js/index.js"></script>
 </body>

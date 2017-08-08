@@ -3,7 +3,9 @@ window.onload = function () {
       shareEl = document.querySelector('.share'),
       getBtn = document.querySelectorAll('.btn-get'),
       getEl = document.querySelector('.get'),
-      music = document.querySelector('.music')
+      music = document.querySelector('.music'),
+      moreBtn = document.querySelector('.btn-more'),
+      modules = document.querySelector('.modules')
 
   for (let i = 0; i < getBtn.length; i++) {
     addEvent(getBtn[i], 'click', () => {
@@ -15,7 +17,7 @@ window.onload = function () {
         music.play()
         setTimeout(() => {
           getEl.style.display = 'none'
-        }, 2000)
+        }, 800)
       }
     })
   }
@@ -23,5 +25,9 @@ window.onload = function () {
 
   addEvent(shareBtn, 'click', () => {
     shareEl.style.display = 'none'
+  })
+
+  addEvent(moreBtn, 'click', () => {
+    modules.style.display = 'block'
   })
 }
