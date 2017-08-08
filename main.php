@@ -6,12 +6,12 @@
  * Time: 19:56
  */
 set_include_path(dirname(dirname(__FILE__)));
-include_once("/inc/init.php");
+include_once("inc/init.php");
 session_start();
 
 global $db, $smarty;
 //获取用户信息
-
+$openid = $_COOKIE['openid'];
 $sql = "SELECT * FROM " . PREFIX . "member WHERE openid = '{$openid}'";
 $member = $db->get_row($sql);
 $smarty->assign('member', $member);

@@ -19,13 +19,13 @@
       <div class="rules-row">
         <div class="box">
           <div class="left">
-            <img src="/ChildrenDay/temp/default/images/avatar.png" alt="" class="avatar">
-            <span class="name">杨思雨</span>
+            <img src="{$member.headimgurl}" alt="" class="avatar">
+            <span class="name">{$member.nickname}</span>
           </div>
           <div class="right">
             <i class="icon icon-coin"></i>
             <span>宝宝币</span>
-            <span class="coin-num">8888</span>
+            <span class="coin-num">{$member.gold}</span>
           </div>
         </div>
         <div class="product">
@@ -57,7 +57,7 @@
           <h3 class="name">{$merchant[loop].name}</h3>
           <a href="javascript:;" class="btn btn-get">
             <i class="icon icon-coin-mini"></i>
-            {$merchant[loop].gold}x2
+            {$merchant[loop].gold}x{$member.receive}
           </a>
         </li>
         {/section}

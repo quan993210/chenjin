@@ -7,26 +7,26 @@
  */
 //http://tongwanjie.famishare.net/ChildrenDay/
 set_include_path(dirname(dirname(__FILE__)));
-include_once("/inc/init.php");
 session_start();
 global $db;
-if (!$_SESSION['openid']) {                             //如果$_SESSION中没有openid，说明用户刚刚登陆，就执行getCode、getOpenId、getUserInfo获取他的信息
+//如果$_SESSION中没有openid，说明用户刚刚登陆，就执行getCode、getOpenId、getUserInfo获取他的信息
+if (!$_SESSION['openid']) {
     $code = getCode();
     $access_token = getOpenId($code);
-    $userInfo = getUserInfo();
-    print_r($userInfo);
+    $userInfo = getUserInfo($access_token);
     if ($userInfo) {
-/*        $userInfo = '{    "openid":" OPENID",  " nickname": NICKNAME,   "sex":"1",   "province":"PROVINCE"    "city":"CITY", "country":"COUNTRY",    "headimgurl":    "http://wx.qlogo.cn/mmopen/g3MonUZtNHkdmzicIlibx6iaFqAc56vxLSUfpb6n5WKSYVY0ChQKkiaJSgQ1dZuTOgvLLrhJbERQQ4eMsv84eavHiaiceqxibJxCfHe/46",
-"privilege":[ "PRIVILEGE1" "PRIVILEGE2"     ], "unionid": "o6_bmasdasdsad6_2sgVt7hMZOPfL" } ';*/
-
-
-        $sql = "SELECT * FROM " . PREFIX . "member WHERE openid = '{$userInfo['openid']}'";
+        $sql = "SELECT * FROM member WHERE openid = '{$userInfo['openid']}'";
         $member = $db->get_row($sql);
         if($member){
             $nickname    	= $userInfo['nickname'];
             $headimgurl    	= $userInfo['headimgurl'];
-            $receive       = $member['receive']+1;
-            $sql = "UPDATE member SET nickname = '{$nickname}',headimgurl = '{$headimgurl}',receive = '{$receive}' WHERE openid = '{$openid}'";
+            $time = strtotime(date('Y-m-d 00:00:00',time()));
+            //最后登录时间小于当天0点时间，可视为当天第一次登录
+            if($member['last_time'] < $time){
+                $receive       = $member['receive']+1;
+            }
+            $last_time = time();
+            $sql = "UPDATE member SET nickname = '{$nickname}',headimgurl = '{$headimgurl}',receive = '{$receive}',last_time = '{$last_time}' WHERE openid = '{$openid}'";
             $db->query($sql);
         }else{
             $username    	= "wx_".time();
@@ -37,12 +37,12 @@ if (!$_SESSION['openid']) {                             //如果$_SESSION中没�
             $password    	= md5(123456);
             $receive       = 1;
             $ip    	= real_ip();
+            $last_time = time();
             $add_time	= now_time();
-            $sql = "INSERT INTO member (username, nickname, openid, headimgurl, unionid, password, receive, ip, add_time) VALUES ('{$username}', '{$nickname}', '{$openid}', '{$headimgurl}', '{$unionid}', '{$password}', '{$receive}', '{$ip}', '{$add_time}')";
+            $sql = "INSERT INTO member (username, nickname, openid, headimgurl, unionid, password, receive, ip, last_time, add_time) VALUES ('{$username}', '{$nickname}', '{$openid}', '{$headimgurl}', '{$unionid}', '{$password}', '{$receive}', '{$ip}', '{$last_time}','{$add_time}')";
             $db->query($sql);
         }
-
-        session('openid', $userInfo['openid']);         //写到$_SESSION中。微信缓存很坑爹，调试时请及时清除缓存再试。
+        setcookie("openid",$userInfo['openid']);
     }
 }
 
@@ -78,10 +78,13 @@ function get_access_token(){
  * 不会弹出授权页面，适用于关注公众号后自定义菜单跳转等，如果不关注，那么只能获取openid
  **/
 function getCode(){
+    $APPID = 'wx8750e032a5a24386';
+    $APPSECRET = 'cd4704397f1e7e16a34f1fb1a302ed24';
+    $INDEX_URL = 'http://tongwanjie.famishare.net/ChildrenDay/';
     if (isset($_GET["code"])) {
         return $_GET["code"];
     } else {
-        $str = "location: https://open.weixin.qq.com/connect/oauth2/authorize?appid=" . APPID . "&redirect_uri=" . INDEX_URL . "&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect";
+        $str = "location: https://open.weixin.qq.com/connect/oauth2/authorize?appid=" . $APPID . "&redirect_uri=" . $INDEX_URL . "&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect";
         header($str);
         exit;
     }
@@ -92,7 +95,9 @@ function getCode(){
  * 用于获取用户openid
  **/
 function getOpenId($code){
-    $access_token_url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=" . APPID . "&secret=" . APPSECRET . "&code=" . $code . "&grant_type=authorization_code";
+    $APPID = 'wx8750e032a5a24386';
+    $APPSECRET = 'cd4704397f1e7e16a34f1fb1a302ed24';
+    $access_token_url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=" . $APPID . "&secret=" . $APPSECRET . "&code=" . $code . "&grant_type=authorization_code";
     $access_token_json = https_request($access_token_url);
     $access_token_array = json_decode($access_token_json, TRUE);
     return $access_token_array;
@@ -107,6 +112,8 @@ function getOpenId($code){
  * access_token每日获取次数是有限制的，access_token有时间限制，可以存储到数据库7200s. 7200s后access_token失效
  **/
 function getUserInfo($access_token){
+    $APPID = 'wx8750e032a5a24386';
+    $APPSECRET = 'cd4704397f1e7e16a34f1fb1a302ed24';
     $userinfo_url = "https://api.weixin.qq.com/sns/userinfo?access_token=".$access_token['access_token'] ."&openid=" . $access_token['openid']."&lang=zh_CN";
     $userinfo_json = https_request($userinfo_url);
     $userinfo_array = json_decode($userinfo_json, TRUE);
