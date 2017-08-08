@@ -22,6 +22,9 @@ switch ($action)
     case "gift_list":
         gift_list();
         break;
+    case "success":
+        success();
+        break;
 }
 
 function main(){
@@ -60,4 +63,9 @@ function gift_list(){
     $gift 		= $db->get_all($sql);
     $smarty->assign('gift', $gift);;
     $smarty->display('list.html');
+}
+
+function success(){
+    global $db, $smarty;
+    $smarty->display('success.html');
 }

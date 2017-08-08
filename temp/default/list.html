@@ -6,8 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
   <title>礼品列表</title>
-  <link rel="stylesheet" type="text/css" href="./css/common.css">
-  <link rel="stylesheet" type="text/css" href="./css/list.css">
+  <link rel="stylesheet" type="text/css" href="/ChildrenDay/temp/default/css/common.css">
+  <link rel="stylesheet" type="text/css" href="/ChildrenDay/temp/default/css/list.css">
   <style>
   
   </style>
@@ -26,46 +26,18 @@
     </div>
     <div class="product">
       <ul class="product-list">
+        {section name=loop loop=$gift}
         <li class="product-item">
-          <a href="">
-            <img src="./images/thumb.png" alt="" class="thumb">
+          <a href="main.php?id={$gift[loop].id}&action=exchange">
+            <img src="{$gift[loop].image}" alt="" class="thumb">
             <div class="intro">
-              <h3 class="product-name">美赞成荷兰铂金版1段婴儿奶粉400g*1罐</h3>
-              <p class="customer-name">美赞成</p>
-              <p class="coin"><span class="coin-num">2000</span>宝宝币</p>
+              <h3 class="product-name">{$gift[loop].name}</h3>
+              <p class="customer-name">{$gift[loop].merchant_name}</p>
+              <p class="coin"><span class="coin-num">{$gift[loop].buy_gold}</span>宝宝币</p>
             </div>
           </a>
         </li>
-        <li class="product-item">
-          <a href="./exchange.html">
-            <img src="./images/thumb.png" alt="" class="thumb">
-            <div class="intro">
-              <h3 class="product-name">美赞成荷兰铂金版1段婴儿奶粉400g*1罐</h3>
-              <p class="customer-name">美赞成</p>
-              <p class="coin"><span class="coin-num">2000</span>宝宝币</p>
-            </div>
-          </a>
-        </li>
-        <li class="product-item">
-          <a href="">
-            <img src="./images/thumb.png" alt="" class="thumb">
-            <div class="intro">
-              <h3 class="product-name">美赞成荷兰铂金版1段婴儿奶粉400g*1罐</h3>
-              <p class="customer-name">美赞成</p>
-              <p class="coin"><span class="coin-num">2000</span>宝宝币</p>
-            </div>
-          </a>
-        </li>
-        <li class="product-item">
-          <a href="">
-            <img src="./images/thumb.png" alt="" class="thumb">
-            <div class="intro">
-              <h3 class="product-name">美赞成荷兰铂金版1段婴儿奶粉400g*1罐</h3>
-              <p class="customer-name">美赞成</p>
-              <p class="coin"><span class="coin-num">2000</span>宝宝币</p>
-            </div>
-          </a>
-        </li>
+        {/section}
       </ul>
     </div>
   </div>
