@@ -19,7 +19,7 @@ if(isset($_GET['openid']) && !empty($_GET['openid'])){
 }
 
 //include_once("/inc/init.php");
-href_locate('main.php?openid='.$openid);
+href_locate('main.php??action=main&openid='.$openid);
 
 
 

@@ -33,7 +33,7 @@
           <ul class="product-list">
             {section name=loop loop=$gift}
             <li class="product-item">
-              <a href="weixin/exchange.php?id={$gift[loop].id}">
+              <a href="main.php?id={$gift[loop].id}&action=exchange">
                 <img src="{$gift[loop].image}" alt="" class="thumb">
                 <div class="intro">
                   <h3 class="product-name">{$gift[loop].name}</h3>
@@ -44,7 +44,7 @@
             </li>
             {/section}
           </ul>
-          <a href="weixin/exchange.php" class="btn btn-more">查看更多可兑换礼品</a>
+          <a href="main.php?action=gift_list" class="btn btn-more">查看更多可兑换礼品</a>
         </div>
       </div>
     </header>
