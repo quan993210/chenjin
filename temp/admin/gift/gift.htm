@@ -40,7 +40,7 @@
 	<tr>
 		<td class="label">礼品图片：</td>
 		<td>
-			<img src="{if $gift.image neq ''}{$url_path}{$gift.image}{else}{$url_path}/images/default_article.jpg{/if}" id="image_img" class="upload-img" /><br/>
+			<img src="{if $gift.image neq ''}{$gift.image}{else}{$url_path}/images/default_article.jpg{/if}" id="image_img" class="upload-img" /><br/>
 			<input type="hidden" value="{$gift.image}" name="image_path" id="image_path" />
 			<input type="button" id="image_btn" class="upload-btn" value="上传图片" /> （尺寸：180*180）
 		</td>

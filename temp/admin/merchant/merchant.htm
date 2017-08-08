@@ -40,7 +40,7 @@
 	<tr>
 		<td class="label">商户LOGO：</td>
 		<td>
-			<img src="{if $merchant.logo neq ''}{$url_path}{$merchant.logo}{else}{$url_path}/images/default_article.jpg{/if}" id="logo_img" class="upload-img" /><br/>
+			<img src="{if $merchant.logo neq ''}{$merchant.logo}{else}{$url_path}/images/default_article.jpg{/if}" id="logo_img" class="upload-img" /><br/>
 			<input type="hidden" value="{$merchant.logo}" name="logo_path" id="logo_path" />
 			<input type="button" id="logo_btn" class="upload-btn" value="上传LOGO" /> （尺寸：180*180）
 		</td>
