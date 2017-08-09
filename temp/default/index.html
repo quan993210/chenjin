@@ -45,7 +45,7 @@
             {/section}
           </ul>
           {if $member.mobile neq ''}
-          <a href="index.php?action=gift_list" class="btn btn-more-no">查看更多可兑换礼品</a>
+          <a href="main.php?action=gift_list" class="btn btn-more-no">查看更多可兑换礼品</a>
           {else}
           <a href="javascript:void (0)" class="btn btn-more">查看更多可兑换礼品</a>
           {/if}
@@ -81,7 +81,7 @@
     </div>
   </div>
   <div class="modules">
-    <form action="index.php?action=update_member">
+    <form action="main.php?action=update_member">
       <h2>填写信息</h2>
       <input id="openid" type="hidden" name="openid" value="{$member.openid}"/>
       <input id="name" type="text" name="name" value="" placeholder="您的名字"/>
@@ -92,9 +92,8 @@
   <audio class="music" src="/ChildrenDay/temp/default/music/gold.mp3"></audio> 
   <script src="/ChildrenDay/temp/default/js/common.js"></script>
   <script src="/ChildrenDay/temp/default/js/index.js"></script>
+  <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
   <script>
-
-
     wx.config({
       debug: false,
       appId: '{$signPackage["appId"]}',
@@ -107,8 +106,6 @@
       'onMenuShareAppMessage'
     ]
     });
-
-
     wx.ready(function(){
       wx.onMenuShareTimeline({
         title:'夏季童玩节！', // 分享标题
@@ -141,8 +138,6 @@
 
 
     })
-
-
   </script>
 </body>
 </html>
