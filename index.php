@@ -23,7 +23,8 @@ if(isset($_GET['openid']) && !empty($_GET['openid'])){
         $receive       = $member['receive']+1;
         $sql = "UPDATE member SET receive = '{$receive}' WHERE openid = '{$p_openid}'";
         $db->query($sql);
-        $sql = "INSERT INTO invite (p_openid,openid,add_time) VALUES ('{$p_openid}', '{$openid}','{$add_time}')";
+        $add_time	= time();
+        $sql = "INSERT INTO invite (p_openid,openid,addtime) VALUES ('{$p_openid}', '{$openid}','{$add_time}')";
         $db->query($sql);
     }
 }

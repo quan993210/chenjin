@@ -193,33 +193,22 @@ function getJsApiTicket() {
 function getAccessToken() {
     $APPID = 'wx8750e032a5a24386';
     $APPSECRET = 'cd4704397f1e7e16a34f1fb1a302ed24';
-    // access_token 应该全局存储与更新，以下代码以写入到文件中做示例
-    $data = json_decode(get_php_file("access_token.php"));
+    $data = json_decode(file_get_contents("access_token.json"));
     if ($data->expire_time < time()) {
-        // 如果是企业号用以下URL获取access_token
-        // $url = "https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=appId&corpsecret=appSecret";
-        $url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=".$APPID."&secret=".$APPSECRET;
+        $url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid={$APPID}&secret={$APPSECRET}";
         $res = json_decode(httpGet($url));
         $access_token = $res->access_token;
         if ($access_token) {
-            $data->expire_time = time() + 7200;
+            $data->expire_time = time() + 7000;
             $data->access_token = $access_token;
-
-            set_php_file("access_token.php", json_encode($data));
+            $fp = fopen("access_token.json", "w");
+            fwrite($fp, json_encode($data));
+            fclose($fp);
         }
     } else {
         $access_token = $data->access_token;
     }
-
     return $access_token;
-}
-function get_php_file($filename) {
-    return trim(substr(file_get_contents($filename), 15));
-}
-function set_php_file($filename, $content) {
-    $fp = fopen($filename, "w");
-    fwrite($fp, "<?php exit();?>" . $content);
-    fclose($fp);
 }
 
 
