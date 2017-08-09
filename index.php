@@ -8,6 +8,11 @@
 include_once("inc/init.php");
 
 global $db;
+//cookie记录邀请人id
+if(isset($_GET['openid']) && !empty($_GET['openid'])){
+    setcookie("p_openid",$_GET['openid']);
+}
+
 $code = getCode();
 $access_token = getOpenId($code);
 $userInfo = getUserInfo($access_token);
@@ -44,9 +49,9 @@ if ($userInfo) {
 }
 
 $openid = $_COOKIE['openid'];
-//用户点击进入是否有人邀请
-if(isset($_GET['openid']) && !empty($_GET['openid'])){
-    $p_openid = $_GET['openid'];
+//存在邀请人id记录邀请关系并增加邀请人领取宝宝币次数
+if(isset($_COOKIE['p_openid']) && !empty($_COOKIE['p_openid'])){
+    $p_openid = $_COOKIE['p_openid'];
     $sql = "SELECT * FROM invite WHERE p_openid = '{$p_openid}' and openid = '{$openid}'";
     $invite = $db->get_row($sql);
     if(!$invite){
@@ -59,6 +64,7 @@ if(isset($_GET['openid']) && !empty($_GET['openid'])){
         $sql = "INSERT INTO invite (p_openid,openid,addtime) VALUES ('{$p_openid}', '{$openid}','{$add_time}')";
         $db->query($sql);
     }
+    setcookie("p_openid",'');
 }
 //include_once("/inc/init.php");
 href_locate('main.php??action=main');

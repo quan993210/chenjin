@@ -78,12 +78,13 @@ function success(){
 }
 function update_member(){
     global $db, $smarty;
-    $openid = irequest('openid');
-    $name    	= crequest('name');
-    $mobile = irequest('mobile');
+    $openid = $_POST['openid'];
+
+    $name    	= $_POST['name'];
+    $mobile     = $_POST['mobile'];
     $sql = "UPDATE member SET name = '{$name}',mobile = '{$mobile}' WHERE openid = '{$openid}'";
     $db->query($sql);
-    $url_to = "index.php";
+    $url_to = "main.php?action=gift_list";
     url_locate($url_to, '添加成功');
 }
 

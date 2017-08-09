@@ -81,9 +81,9 @@
     </div>
   </div>
   <div class="modules">
-    <form action="main.php?action=update_member">
+    <form action="main.php?action=update_member" method="post">
       <h2>填写信息</h2>
-      <input id="openid" type="hidden" name="openid" value="{$member.openid}"/>
+      <input id="openid" type="text" name="openid" value="{$member.openid}"/>
       <input id="name" type="text" name="name" value="" placeholder="您的名字"/>
       <input id="mobile" type="text" name="mobile" value="" placeholder="您的手机号码"/>
       <input class="btn-sub" type="submit" name="submit" value="提交">
@@ -109,7 +109,7 @@
     wx.ready(function(){
       wx.onMenuShareTimeline({
         title:'夏季童玩节！', // 分享标题
-        link: 'http://tongwanjie.famishare.net/ChildrenDay?openid='+'{$openid}', // 分享链接
+        link: 'http://tongwanjie.famishare.net/ChildrenDay?openid='+'{$member.openid}', // 分享链接
         imgUrl: 'http://tongwanjie.famishare.net/ChildrenDay/temp/default/image/logo.png', // 分享图标
         desc:'微信关注“夏季童玩节”，嗨够整个夏季！',
         success: function () {
@@ -123,7 +123,7 @@
       wx.onMenuShareAppMessage({
         title: '夏季童玩节！', // 分享标题
         desc: '微信关注“夏季童玩节”，嗨够整个夏季！', // 分享描述
-        link: 'http://tongwanjie.famishare.net/ChildrenDay?openid='+'{$openid}', // 分享链接
+        link: 'http://tongwanjie.famishare.net/ChildrenDay?openid='+'{$member.openid}', // 分享链接
         imgUrl: 'http://tongwanjie.famishare.net/ChildrenDay/temp/default/image/logo.png', // 分享图标
         type: '', // 分享类型,music、video或link，不填默认为link
         dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
