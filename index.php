@@ -67,7 +67,7 @@ if(isset($_COOKIE['p_openid']) && !empty($_COOKIE['p_openid'])){
     setcookie("p_openid",'');
 }
 //include_once("/inc/init.php");
-href_locate('main.php??action=main');
+href_locate('main.php?action=main');
 
 /**
  * @explain

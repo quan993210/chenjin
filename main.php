@@ -111,9 +111,9 @@ function getSignPackage() {
     $timestamp = time();
     $nonceStr = createNonceStr();
 
+
     // 这里参数的顺序要按照 key 值 ASCII 码升序排序
     $string = "jsapi_ticket=$jsapiTicket&noncestr=$nonceStr&timestamp=$timestamp&url=$url";
-
     $signature = sha1($string);
 
     $signPackage = array(
@@ -126,6 +126,7 @@ function getSignPackage() {
     );
     return $signPackage;
 }
+
 
 function createNonceStr($length = 16) {
     $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -162,7 +163,7 @@ function getAccessToken() {
     $APPSECRET = 'cd4704397f1e7e16a34f1fb1a302ed24';
     $data = json_decode(file_get_contents("access_token.json"));
     if ($data->expire_time < time()) {
-        $url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid={$APPID}&secret={$APPSECRET}";
+        $url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=$APPID&secret=$APPSECRET";
         $res = json_decode(httpGet($url));
         $access_token = $res->access_token;
         if ($access_token) {
