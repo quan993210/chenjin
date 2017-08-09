@@ -8,67 +8,48 @@
 //http://tongwanjie.famishare.net/ChildrenDay/
 set_include_path(dirname(dirname(__FILE__)));
 session_start();
+
 global $db;
-//如果$_SESSION中没有openid，说明用户刚刚登陆，就执行getCode、getOpenId、getUserInfo获取他的信息
-if (!$_SESSION['openid']) {
+if(!$_GET['code']){
     $code = getCode();
-    $access_token = getOpenId($code);
-    $userInfo = getUserInfo($access_token);
-    if ($userInfo) {
-        $sql = "SELECT * FROM member WHERE openid = '{$userInfo['openid']}'";
-        $member = $db->get_row($sql);
-        if($member){
-            $nickname    	= $userInfo['nickname'];
-            $headimgurl    	= $userInfo['headimgurl'];
-            $time = strtotime(date('Y-m-d 00:00:00',time()));
-            //最后登录时间小于当天0点时间，可视为当天第一次登录
-            if($member['last_time'] < $time){
-                $receive       = $member['receive']+1;
-            }
-            $last_time = time();
-            $sql = "UPDATE member SET nickname = '{$nickname}',headimgurl = '{$headimgurl}',receive = '{$receive}',last_time = '{$last_time}' WHERE openid = '{$openid}'";
-            $db->query($sql);
-        }else{
-            $username    	= "wx_".time();
-            $nickname    	= $userInfo['nickname'];
-            $openid    	= $userInfo['openid'];
-            $headimgurl    	= $userInfo['headimgurl'];
-            $unionid    	= $userInfo['unionid'];
-            $password    	= md5(123456);
-            $receive       = 1;
-            $ip    	= real_ip();
-            $last_time = time();
-            $add_time	= now_time();
-            $sql = "INSERT INTO member (username, nickname, openid, headimgurl, unionid, password, receive, ip, last_time, add_time) VALUES ('{$username}', '{$nickname}', '{$openid}', '{$headimgurl}', '{$unionid}', '{$password}', '{$receive}', '{$ip}', '{$last_time}','{$add_time}')";
-            $db->query($sql);
+}else{
+    $code = $_GET['code'];
+}
+$access_token = getOpenId($code);
+$userInfo = getUserInfo($access_token);
+if ($userInfo) {
+    $sql = "SELECT * FROM member WHERE openid = '{$userInfo['openid']}'";
+    $member = $db->get_row($sql);
+    if($member){
+        $nickname    	= $userInfo['nickname'];
+        $headimgurl    	= $userInfo['headimgurl'];
+        $time = strtotime(date('Y-m-d 00:00:00',time()));
+        //最后登录时间小于当天0点时间，可视为当天第一次登录
+        if($member['last_time'] < $time){
+            $member['receive']       = $member['receive']+1;
         }
-        setcookie("openid",$userInfo['openid']);
+        $last_time = time();
+        $sql = "UPDATE member SET nickname = '{$nickname}',headimgurl = '{$headimgurl}',receive = '{$member['receive']}',last_time = '{$last_time}' WHERE openid = '{$member['openid']}'";
+        $db->query($sql);
+
+    }else{
+        $username    	= "wx_".time();
+        $nickname    	= $userInfo['nickname'];
+        $openid    	= $userInfo['openid'];
+        $headimgurl    	= $userInfo['headimgurl'];
+        $unionid    	= $userInfo['unionid'];
+        $password    	= md5(123456);
+        $receive       = 1;
+        $ip    	= real_ip();
+        $last_time = time();
+        $add_time	= now_time();
+        $sql = "INSERT INTO member (username, nickname, openid, headimgurl, unionid, password, receive, ip, last_time, add_time) VALUES ('{$username}', '{$nickname}', '{$openid}', '{$headimgurl}', '{$unionid}', '{$password}', '{$receive}', '{$ip}', '{$last_time}','{$add_time}')";
+        $db->query($sql);
     }
+    setcookie("openid",$userInfo['openid']);
 }
 
 
-/*请求URL，返回 ACCESS_TOKEN*/
-function get_access_token(){
-    // access_token 应该全局存储与更新，以下代码以写入到文件中做示例
-    $data = json_decode($this->get_php_file("access_token.php"));
-    if ($data->expire_time < time()) {
-        // 如果是企业号用以下URL获取access_token
-        // $url = "https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=$this->appId&corpsecret=$this->appSecret";
-        $url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=".APPID."&secret=".APPSECRET;
-        $res = json_decode($this->httpGet($url));
-        $access_token = $res->access_token;
-        if ($access_token) {
-            $data->expire_time = time() + 7200;
-            $data->access_token = $access_token;
-
-            $this->set_php_file("access_token.php", json_encode($data));
-        }
-    } else {
-        $access_token = $data->access_token;
-    }
-
-    return $access_token;
-}
 
 /**
  * @explain
@@ -154,3 +135,91 @@ function httpGet($url) {
     curl_close($curl);
     return $res;
 }
+
+function getSignPackage() {
+    $APPID = 'wx8750e032a5a24386';
+    $APPSECRET = 'cd4704397f1e7e16a34f1fb1a302ed24';
+    $jsapiTicket = getJsApiTicket();
+    $url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+    $timestamp = time();
+    $nonceStr = createNonceStr();
+
+    // 这里参数的顺序要按照 key 值 ASCII 码升序排序
+    $string = "jsapi_ticket=$jsapiTicket&noncestr=$nonceStr&timestamp=$timestamp&url=$url";
+
+    $signature = sha1($string);
+
+    $signPackage = array(
+        "appId"     => $APPID,
+        "nonceStr"  => $nonceStr,
+        "timestamp" => $timestamp,
+        "url"       => $url,
+        "signature" => $signature,
+        "rawString" => $string
+    );
+    return $signPackage;
+}
+
+function createNonceStr($length = 16) {
+    $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    $str = "";
+    for ($i = 0; $i < $length; $i++) {
+        $str .= substr($chars, mt_rand(0, strlen($chars) - 1), 1);
+    }
+    return $str;
+}
+
+function getJsApiTicket() {
+    // jsapi_ticket 应该全局存储与更新，以下代码以写入到文件中做示例
+    $data = json_decode(file_get_contents("jsapi_ticket.json"));
+    if ($data->expire_time < time()) {
+        $accessToken = getAccessToken();
+        $url = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?type=jsapi&access_token=$accessToken";
+        $res = json_decode(httpGet($url));
+        $ticket = $res->ticket;
+        if ($ticket) {
+            $data->expire_time = time() + 7000;
+            $data->jsapi_ticket = $ticket;
+            $fp = fopen("jsapi_ticket.json", "w");
+            fwrite($fp, json_encode($data));
+            fclose($fp);
+        }
+    } else {
+        $ticket = $data->jsapi_ticket;
+    }
+    return $ticket;
+}
+
+function getAccessToken() {
+    $APPID = 'wx8750e032a5a24386';
+    $APPSECRET = 'cd4704397f1e7e16a34f1fb1a302ed24';
+    // access_token 应该全局存储与更新，以下代码以写入到文件中做示例
+    $data = json_decode(get_php_file("access_token.php"));
+    if ($data->expire_time < time()) {
+        // 如果是企业号用以下URL获取access_token
+        // $url = "https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=appId&corpsecret=appSecret";
+        $url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=".$APPID."&secret=".$APPSECRET;
+        $res = json_decode(httpGet($url));
+        $access_token = $res->access_token;
+        if ($access_token) {
+            $data->expire_time = time() + 7200;
+            $data->access_token = $access_token;
+
+            set_php_file("access_token.php", json_encode($data));
+        }
+    } else {
+        $access_token = $data->access_token;
+    }
+
+    return $access_token;
+}
+function get_php_file($filename) {
+    return trim(substr(file_get_contents($filename), 15));
+}
+function set_php_file($filename, $content) {
+    $fp = fopen($filename, "w");
+    fwrite($fp, "<?php exit();?>" . $content);
+    fclose($fp);
+}
+
+
