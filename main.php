@@ -88,7 +88,7 @@ function receive(){
     $sql = "UPDATE member SET gold = '{$mermber['gold']}',receive = 0 WHERE openid = '{$openid}'";
     $db->query($sql);
     $addtime = now_time();
-    $sql = "INSERT INTO receive (openid,nickname,merchant_id,merchant_name,addtime) VALUES ('{$openid}', '{$mermber['nickname']}', '{$merchant['merchant_id']}', '{$mermber['merchant_name']}','{$addtime}')";
+    $sql = "INSERT INTO receive (openid,nickname,merchant_id,merchant_name,gold,addtime) VALUES ('{$openid}', '{$mermber['nickname']}', '{$merchant['id']}', '{$merchant['name']}',{$gold},'{$addtime}')";
     $db->query($sql);
     $smarty->assign('signPackage',  $GLOBALS['signPackage']);
     url_locate('main.php?action=index&receive=1', '领取成功');
