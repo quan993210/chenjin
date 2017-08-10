@@ -46,28 +46,31 @@ if ($userInfo) {
         $db->query($sql);
     }
     setcookie("openid",$userInfo['openid']);
-
-}
-$openid = $_COOKIE['openid'];
+    $openid = $userInfo['openid'];
 //存在邀请人id记录邀请关系并增加邀请人领取宝宝币次数
-if(isset($_COOKIE['p_openid']) && !empty($_COOKIE['p_openid'])){
-    $p_openid = $_COOKIE['p_openid'];
-    $sql = "SELECT * FROM invite WHERE p_openid = '{$p_openid}' and openid = '{$openid}'";
-    $invite = $db->get_row($sql);
-    if(!$invite){
-        $sql = "SELECT * FROM member WHERE openid = '{$p_openid}'";
-        $member = $db->get_row($sql);
-        $receive       = $member['receive']+1;
-        $sql = "UPDATE member SET receive = '{$receive}' WHERE openid = '{$p_openid}'";
-        $db->query($sql);
-        $add_time	= time();
-        $sql = "INSERT INTO invite (p_openid,openid,addtime) VALUES ('{$p_openid}', '{$openid}','{$add_time}')";
-        $db->query($sql);
+    if(isset($_COOKIE['p_openid']) && !empty($_COOKIE['p_openid'])){
+        $p_openid = $_COOKIE['p_openid'];
+        $sql = "SELECT * FROM invite WHERE p_openid = '{$p_openid}' and openid = '{$openid}'";
+        $invite = $db->get_row($sql);
+        if(!$invite){
+            $sql = "SELECT * FROM member WHERE openid = '{$p_openid}'";
+            $member = $db->get_row($sql);
+            $receive       = $member['receive']+1;
+            $sql = "UPDATE member SET receive = '{$receive}' WHERE openid = '{$p_openid}'";
+            $db->query($sql);
+            $add_time	= time();
+            $sql = "INSERT INTO invite (p_openid,openid,addtime) VALUES ('{$p_openid}', '{$openid}','{$add_time}')";
+            print_r($openid);
+            print_r($sql);
+            $db->query($sql);
+            exit;
+        }
+        setcookie("p_openid",'');
     }
-    setcookie("p_openid",'');
+    href_locate('main.php?action=index');
 }
-//include_once("/inc/init.php");
-href_locate('main.php?action=index');
+
+
 
 /**
  * @explain
