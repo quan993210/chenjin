@@ -46,6 +46,7 @@ if ($userInfo) {
         $db->query($sql);
     }
     setcookie("openid",$userInfo['openid']);
+
 }
 $openid = $_COOKIE['openid'];
 //存在邀请人id记录邀请关系并增加邀请人领取宝宝币次数
@@ -76,7 +77,8 @@ href_locate('main.php?action=index');
  * 不会弹出授权页面，适用于关注公众号后自定义菜单跳转等，如果不关注，那么只能获取openid
  **/
 function getCode(){
-    $APPID = 'wx8750e032a5a24386';
+    $APPID = APPID;
+    print_r($APPID);exit;
     $APPSECRET = 'cd4704397f1e7e16a34f1fb1a302ed24';
     $INDEX_URL = 'http://tongwanjie.famishare.net/ChildrenDay/';
     if (isset($_GET["code"])) {

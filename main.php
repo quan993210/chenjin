@@ -30,6 +30,9 @@ switch ($action)
     case "update_member":
         update_member();
         break;
+    case "receive":
+        receive();
+        break;
 }
 
 function index(){
@@ -50,6 +53,7 @@ function index(){
     $merchant 		= $db->get_all($sql);
     $smarty->assign('merchant', $merchant);
     $smarty->assign('signPackage',  $GLOBALS['signPackage']);
+    $smarty->assign('receive',$_GET['receive']);
     $smarty->display('index.html');
 }
 
@@ -71,10 +75,31 @@ function gift_list(){
     $smarty->display('list.html');
 }
 
+function receive(){
+    global $db, $smarty;
+    $openid = $_GET['openid'];
+    $merchant_id = $_GET['merchant_id'];
+    $sql = "SELECT * FROM member WHERE openid = '{$openid}'";
+    $mermber 		= $db->get_row($sql);
+    $sql 		= "SELECT * FROM merchant WHERE id='{$merchant_id}'";
+    $merchant 		= $db->get_row($sql);
+    $gold = intval($mermber['receive'])*intval($merchant['gold']);
+    $mermber['gold'] = $mermber['gold'] + $gold;
+    $sql = "UPDATE member SET gold = '{$mermber['gold']}',receive = 0 WHERE openid = '{$openid}'";
+    $db->query($sql);
+    $addtime = now_time();
+    $sql = "INSERT INTO receive (openid,nickname,merchant_id,merchant_name,addtime) VALUES ('{$openid}', '{$mermber['nickname']}', '{$merchant['merchant_id']}', '{$mermber['merchant_name']}','{$addtime}')";
+    $db->query($sql);
+    $smarty->assign('signPackage',  $GLOBALS['signPackage']);
+    url_locate('main.php?action=index&receive=1', '领取成功');
+}
+
+//兑换方法
 function success(){
     global $db, $smarty;
     $smarty->display('success.html');
 }
+
 function update_member(){
     global $db, $smarty;
     $openid = $_POST['openid'];

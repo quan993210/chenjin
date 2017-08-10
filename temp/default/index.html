@@ -60,10 +60,17 @@
         <li class="customer-item">
           <img src="{$merchant[loop].logo}" alt="" class="logo">
           <h3 class="name">{$merchant[loop].name}</h3>
-          <a href="javascript:;" class="btn btn-get">
+          {if $receive ==1}
+          <a href="javascript:void (0)" class="btn btn-get geted">
+            <i class="icon icon-coin-mini"></i>
+            已领取
+          </a>
+          {else}
+          <a href="main.php?action=receive&openid={$member.openid}&merchant_id={$merchant[loop].id}" class="btn btn-get">
             <i class="icon icon-coin-mini"></i>
             {$merchant[loop].gold}x{$member.receive}
           </a>
+          {/if}
         </li>
         {/section}
       </ul>
@@ -83,7 +90,7 @@
   <div class="modules">
     <form action="main.php?action=update_member" method="post">
       <h2>填写信息</h2>
-      <input id="openid" type="text" name="openid" value="{$member.openid}"/>
+      <input id="openid" type="hidden" name="openid" value="{$member.openid}"/>
       <input id="name" type="text" name="name" value="" placeholder="您的名字"/>
       <input id="mobile" type="text" name="mobile" value="" placeholder="您的手机号码"/>
       <input class="btn-sub" type="submit" name="submit" value="提交">
