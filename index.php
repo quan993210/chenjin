@@ -78,9 +78,8 @@ href_locate('main.php?action=index');
  **/
 function getCode(){
     $APPID = APPID;
-    print_r($APPID);exit;
-    $APPSECRET = 'cd4704397f1e7e16a34f1fb1a302ed24';
-    $INDEX_URL = 'http://tongwanjie.famishare.net/ChildrenDay/';
+    $APPSECRET = APPSECRET;
+    $INDEX_URL = INDEX_URL;
     if (isset($_GET["code"])) {
         return $_GET["code"];
     } else {
@@ -95,8 +94,8 @@ function getCode(){
  * 用于获取用户openid
  **/
 function getOpenId($code){
-    $APPID = 'wx8750e032a5a24386';
-    $APPSECRET = 'cd4704397f1e7e16a34f1fb1a302ed24';
+    $APPID = APPID;
+    $APPSECRET = APPSECRET;
     $access_token_url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=" . $APPID . "&secret=" . $APPSECRET . "&code=" . $code . "&grant_type=authorization_code";
     $access_token_json = https_request($access_token_url);
     $access_token_array = json_decode($access_token_json, TRUE);
@@ -112,8 +111,8 @@ function getOpenId($code){
  * access_token每日获取次数是有限制的，access_token有时间限制，可以存储到数据库7200s. 7200s后access_token失效
  **/
 function getUserInfo($access_token){
-    $APPID = 'wx8750e032a5a24386';
-    $APPSECRET = 'cd4704397f1e7e16a34f1fb1a302ed24';
+    $APPID = APPID;
+    $APPSECRET = APPSECRET;
     $userinfo_url = "https://api.weixin.qq.com/sns/userinfo?access_token=".$access_token['access_token'] ."&openid=" . $access_token['openid']."&lang=zh_CN";
     $userinfo_json = https_request($userinfo_url);
     $userinfo_array = json_decode($userinfo_json, TRUE);

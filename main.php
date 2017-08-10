@@ -128,8 +128,8 @@ function httpGet($url) {
 }
 
 function getSignPackage() {
-    $APPID = 'wx8750e032a5a24386';
-    $APPSECRET = 'cd4704397f1e7e16a34f1fb1a302ed24';
+    $APPID = APPID;
+    $APPSECRET = APPSECRET;
     $jsapiTicket = getJsApiTicket();
     $url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
     $timestamp = time();
@@ -183,8 +183,8 @@ function getJsApiTicket() {
 }
 
 function getAccessToken() {
-    $APPID = 'wx8750e032a5a24386';
-    $APPSECRET = 'cd4704397f1e7e16a34f1fb1a302ed24';
+    $APPID = APPID;
+    $APPSECRET = APPSECRET;
     $data = json_decode(file_get_contents("access_token.json"));
     if ($data->expire_time < time()) {
         $url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=$APPID&secret=$APPSECRET";
