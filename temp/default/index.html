@@ -66,10 +66,12 @@
             已领取
           </a>
           {else}
-          <a href="main.php?action=receive&openid={$member.openid}&merchant_id={$merchant[loop].id}" class="btn btn-get">
-            <i class="icon icon-coin-mini"></i>
-            {$merchant[loop].gold}x{$member.receive}
-          </a>
+              {if $member.receive ==0}
+                  <a href="javascript:void (0)" class="btn btn-get geted">
+              {else}
+                 <a href="main.php?action=receive&openid={$member.openid}&merchant_id={$merchant[loop].id}" class="btn btn-get">
+             {/if}
+               <i class="icon icon-coin-mini"></i>{$merchant[loop].gold}x{$member.receive}</a>
           {/if}
         </li>
         {/section}
