@@ -7,7 +7,6 @@
  */
 set_include_path(dirname(dirname(__FILE__)));
 include_once("inc/init.php");
-
 $signPackage = GetSignPackage();
 $GLOBALS['signPackage'] =$signPackage;
 session_start();
