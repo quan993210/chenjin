@@ -48,13 +48,13 @@ switch ($action)
 function menu()
 {
 	global $smarty;
-	
-	$sub[]  = array('url' => 'member.php', 				'name' => '会员列表');
 	//$sub[]  = array('url' => 'info.php?cat=about', 		'name' => '关于我们');
 	//$sub[]  = array('url' => 'info.php?cat=contact', 	'name' => '联系我们');
 	//$sub[]  = array('url' => 'message.php', 			'name' => '留言管理');
 //	$sub[]  = array('url' => 'log.php', 				'name' => '日志管理');
 	$sub[]  = array('url' => 'admin.php', 				'name' => '管理员管理');
+	$sub[]  = array('url' => 'member.php', 				'name' => '会员列表');
+	$sub[]  = array('url' => 'receive.php', 				'name' => '宝宝币领取列表');
 	$menu[] = array('name' => '网站管理', 				'sub' => $sub);
 	
 	/*unset($sub);
