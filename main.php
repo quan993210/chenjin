@@ -77,8 +77,11 @@ function gift_list(){
 
 function receive(){
     global $db, $smarty;
-    $openid = $_GET['openid'];
+     $openid = $_COOKIE['openid'];
     $merchant_id = $_GET['merchant_id'];
+	print_r($openid);
+	print_r($merchant_id);
+	exit;
     $sql = "SELECT * FROM member WHERE openid = '{$openid}'";
     $mermber 		= $db->get_row($sql);
     $sql 		= "SELECT * FROM merchant WHERE id='{$merchant_id}'";
@@ -90,8 +93,10 @@ function receive(){
     $addtime = now_time();
     $sql = "INSERT INTO receive (openid,nickname,merchant_id,merchant_name,gold,addtime) VALUES ('{$openid}', '{$mermber['nickname']}', '{$merchant['id']}', '{$merchant['name']}',{$gold},'{$addtime}')";
     $db->query($sql);
-    $smarty->assign('signPackage',  $GLOBALS['signPackage']);
-    url_locate('main.php?action=index&receive=1', '领取成功');
+	echo json_encode('领取成功');
+    exit;
+    //$smarty->assign('signPackage',  $GLOBALS['signPackage']);
+    //url_locate('main.php?action=index&receive=1', '领取成功');
 }
 
 //兑换方法

@@ -60,19 +60,13 @@
         <li class="customer-item">
           <img src="{$merchant[loop].logo}" alt="" class="logo">
           <h3 class="name">{$merchant[loop].name}</h3>
-          {if $receive ==1}
-          <a href="javascript:void (0)" class="btn btn-get geted">
-            <i class="icon icon-coin-mini"></i>
-            已领取
-          </a>
-          {else}
-              {if $member.receive ==0}
+          {if $member.receive ==0}
                   <a href="javascript:void (0)" class="btn btn-get geted">
               {else}
-                 <a href="main.php?action=receive&openid={$member.openid}&merchant_id={$merchant[loop].id}" class="btn btn-get">
+                 <a href="javascript:void (0)" id="{$merchant[loop].id}" class="btn btn-get">
              {/if}
                <i class="icon icon-coin-mini"></i>{$merchant[loop].gold}x{$member.receive}</a>
-          {/if}
+         
         </li>
         {/section}
       </ul>
@@ -98,6 +92,7 @@
       <input class="btn-sub" type="submit" name="submit" value="提交">
     </form>
   </div>
+  <script type="text/javascript" src="/ChildrenDay/js/jquery.js"></script>
   <audio class="music" src="/ChildrenDay/temp/default/music/gold.mp3"></audio> 
   <script src="/ChildrenDay/temp/default/js/common.js"></script>
   <script src="/ChildrenDay/temp/default/js/index.js"></script>
@@ -117,10 +112,10 @@
     });
     wx.ready(function(){
       wx.onMenuShareTimeline({
-        title:'夏季童玩节！', // 分享标题
+        title:'南昌最in的夏季童玩节！', // 分享标题
         link: 'http://tongwanjie.famishare.net/ChildrenDay?openid='+'{$member.openid}', // 分享链接
-        imgUrl: 'http://tongwanjie.famishare.net/ChildrenDay/temp/default/images/logo.png', // 分享图标
-        desc:'微信关注妈妈应用公众号，参加夏季童玩节，嗨够整个夏季！',
+        imgUrl: 'http://tongwanjie.famishare.net/ChildrenDay/temp/default/images/webwxgetmsgimg.png', // 分享图标
+        desc:'妈妈应用夏季童玩节，8.19-8.20，铜锣湾广场1楼，我们不见不散！',
         success: function () {
           // 用户确认分享后执行的回调函数
           alert("分享成功");
@@ -130,10 +125,10 @@
         }
       });
       wx.onMenuShareAppMessage({
-        title: '夏季童玩节！', // 分享标题
-        desc: '微信关注妈妈应用公众号，参加夏季童玩节，嗨够整个夏季！', // 分享描述
+        title: '南昌最in的夏季童玩节！', // 分享标题
+        desc: '妈妈应用夏季童玩节，8.19-8.20，铜锣湾广场1楼，我们不见不散！', // 分享描述
         link: 'http://tongwanjie.famishare.net/ChildrenDay?openid='+'{$member.openid}', // 分享链接
-        imgUrl: 'http://tongwanjie.famishare.net/ChildrenDay/temp/default/images/logo.png', // 分享图标
+        imgUrl: 'http://tongwanjie.famishare.net/ChildrenDay/temp/default/images/webwxgetmsgimg.png', // 分享图标
         type: '', // 分享类型,music、video或link，不填默认为link
         dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
         success: function () {
