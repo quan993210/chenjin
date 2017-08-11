@@ -131,3 +131,6 @@ ol {
   margin-bottom: 1.333333rem;
 }
 
+a:hover {
+  text-decoration: none;
+}

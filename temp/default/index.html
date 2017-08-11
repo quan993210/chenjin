@@ -33,14 +33,12 @@
           <ul class="product-list">
             {section name=loop loop=$gift}
             <li class="product-item">
-              <a href="javascript:void (0)">
                 <img src="{$gift[loop].image}" alt="" class="thumb">
                 <div class="intro">
                   <h3 class="product-name">{$gift[loop].name}</h3>
                   <p class="customer-name">{$gift[loop].merchant_name}</p>
                   <p class="coin"><span class="coin-num">{$gift[loop].buy_gold}</span>宝宝币</p>
                 </div>
-              </a>
             </li>
             {/section}
           </ul>
@@ -85,13 +83,28 @@
   </div>
   <div class="modules">
     <form action="main.php?action=update_member" method="post">
+      <!-- 不填写时点击退出弹框 -->
+      <span class="cancel">X</span>
+      <!-- 结束 -->
       <h2>填写信息</h2>
+      <p class="tips">为便于兑换礼品，请留下您的联系方式</p>
       <input id="openid" type="hidden" name="openid" value="{$member.openid}"/>
       <input id="name" type="text" name="name" value="" placeholder="您的名字"/>
       <input id="mobile" type="text" name="mobile" value="" placeholder="您的手机号码"/>
       <input class="btn-sub" type="submit" name="submit" value="提交">
     </form>
   </div>
+
+  <!-- 产品展示块 -->
+  <div class="product-module">
+    <div>
+      <img src="/ChildrenDay/temp/default/images/thumb.png" alt="">
+      <p class="module-tip">
+        请您于8月19日-20日到红谷滩铜锣湾广场童玩节现场来兑换礼品，先到先得。
+      </p>
+    </div>
+  </div>
+  <!-- end 产品展示块 -->
   <audio class="music" src="/ChildrenDay/temp/default/music/gold.mp3"></audio> 
   <script src="/ChildrenDay/temp/default/js/common.js"></script>
   <script src="/ChildrenDay/temp/default/js/index.js"></script>

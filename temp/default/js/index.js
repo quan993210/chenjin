@@ -5,7 +5,10 @@ window.onload = function () {
       getEl = document.querySelector('.get'),
       music = document.querySelector('.music'),
       moreBtn = document.querySelector('.btn-more'),
-      modules = document.querySelector('.modules')
+      modules = document.querySelector('.modules'),
+      cancelBtn = document.querySelector('.cancel'),
+      productList = document.querySelectorAll('.product-item'),
+      productModule = document.querySelector('.product-module')
   for (let i = 0; i < getBtn.length; i++) {
     addEvent(getBtn[i], 'click', () => {
     if (getBtn[i].classList.contains('geted')) {
@@ -49,4 +52,18 @@ window.onload = function () {
   addEvent(moreBtn, 'click', () => {
     modules.style.display = 'block'
   })
+  // 退出弹框
+  addEvent(cancelBtn, 'click', () => {
+    modules.style.display = 'none'
+})
+
+  for (let i = 0; i < productList.length; i++) {
+    addEvent(productList[i], 'click', () => {
+      productModule.style.display = 'block'
+  })
+  }
+
+  addEvent(productModule, 'click', () => {
+    productModule.style.display = 'none'
+})
 }

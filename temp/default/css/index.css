@@ -286,13 +286,21 @@
   margin: 0 auto;
   margin-top: 3.12rem;
   overflow: hidden;
+  position: relative;
 }
 
 .modules h2 {
   font-size: .453333rem;
   margin-top: .693333rem;
   text-align: center;
-  margin-bottom: .773333rem;
+  /* margin-bottom: .773333rem; */
+}
+
+.modules .tips {
+  width: 6.533333rem;
+  font-size: .346667rem;
+  margin: .4rem auto .3rem;
+  color: #383838;
 }
 
 .modules input {
@@ -318,4 +326,19 @@
   padding-left: 0;
   background-color: #fe0058;
   color: #fff;
+}
+
+.cancel {
+  display: block;
+  height: .566667rem;
+  line-height: .566667rem;
+  width: .566667rem;
+  position: absolute; 
+  top: .133333rem; 
+  right: .133333rem; 
+  text-align: center;
+  font-size: .4rem;
+  color: #383838;
+  border: 1px solid #383838;
+  border-radius: 50%;
 }

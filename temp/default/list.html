@@ -28,18 +28,28 @@
       <ul class="product-list">
         {section name=loop loop=$gift}
         <li class="product-item">
-          <a href="main.php?id={$gift[loop].id}&action=exchange">
+         <!-- <a href="main.php?id={$gift[loop].id}&action=exchange">-->
             <img src="{$gift[loop].image}" alt="" class="thumb">
             <div class="intro">
               <h3 class="product-name">{$gift[loop].name}</h3>
               <p class="customer-name">{$gift[loop].merchant_name}</p>
               <p class="coin"><span class="coin-num">{$gift[loop].buy_gold}</span>宝宝币</p>
             </div>
-          </a>
+         <!-- </a>-->
         </li>
         {/section}
       </ul>
     </div>
+    <!-- 产品展示块 -->
+    <div class="product-module">
+      <div>
+        <img src="/ChildrenDay/temp/default/images/thumb.png" alt="">
+        <p class="module-tip">
+          请您于8月19日-20日到红谷滩铜锣湾广场童玩节现场来兑换礼品，先到先得。
+        </p>
+      </div>
+    </div>
+    <!-- end 产品展示块 -->
   </div>
   <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
   <script>
