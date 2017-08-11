@@ -60,10 +60,7 @@ if ($userInfo) {
             $db->query($sql);
             $add_time	= time();
             $sql = "INSERT INTO invite (p_openid,openid,addtime) VALUES ('{$p_openid}', '{$openid}','{$add_time}')";
-            print_r($openid);
-            print_r($sql);
             $db->query($sql);
-            exit;
         }
         setcookie("p_openid",'');
     }

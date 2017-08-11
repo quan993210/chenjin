@@ -8,7 +8,6 @@ window.onload = function () {
       modules = document.querySelector('.modules')
   for (let i = 0; i < getBtn.length; i++) {
     addEvent(getBtn[i], 'click', () => {
-      console.log('可以点击')
     if (getBtn[i].classList.contains('geted')) {
       return ;
     } else {
@@ -27,31 +26,17 @@ window.onload = function () {
             getEl.style.display = 'block'
             getBtn[i].classList.add('geted')
             getBtn[i].innerHTML = '领取成功';
+            document.getElementById("gold").innerHTML=oAjax.responseText;
             music.play()
             setTimeout(() => {
               getEl.style.display = 'none'
-             }, 800);
+             }, 1500);
+            //setTimeout(window.location.href="http://tongwanjie.famishare.net/ChildrenDay/main.php?action=index", 2000);
           }else{
             alert("失败");
           }
         }
       };
-      console.log(99999)
-      /*$.getJSON('main.php?action=receive', {merchant_id: merchant_id}, function(data){
-        console.log(data)
-        if(data){
-          getEl.style.display = 'block'
-          getBtn[i].classList.add('geted')
-          getBtn[i].innerHTML = '领取成功';
-          music.play()
-          setTimeout(() => {
-            getEl.style.display = 'none'
-        }, 800);
-        }else{
-          // alert('数据错误！')
-          console.log('error')
-        }
-      });*/
     }
   })
   }

@@ -7,6 +7,9 @@
  */
 set_include_path(dirname(dirname(__FILE__)));
 include_once("inc/init.php");
+if(!$_COOKIE['openid']){
+    href_locate('http://tongwanjie.famishare.net/ChildrenDay/');
+}
 $signPackage = GetSignPackage();
 $GLOBALS['signPackage'] =$signPackage;
 session_start();
@@ -35,6 +38,7 @@ switch ($action)
         break;
 }
 
+//首页
 function index(){
     global $db, $smarty;
 //获取用户信息
@@ -57,15 +61,7 @@ function index(){
     $smarty->display('index.html');
 }
 
-function exchange(){
-    global $db, $smarty;
-    $id = irequest('id');
-    $sql = "SELECT * FROM gift WHERE id = '{$id}'";
-    $gift = $db->get_row($sql);
-    $smarty->assign('gift', $gift);
-    $smarty->display('exchange.html');
-}
-
+//礼品列表
 function gift_list(){
     global $db, $smarty;
     $sql 		= "SELECT * FROM gift ORDER BY id DESC";
@@ -75,6 +71,20 @@ function gift_list(){
     $smarty->display('list.html');
 }
 
+//绑定用户手机号码
+function update_member(){
+    global $db, $smarty;
+    $openid = $_POST['openid'];
+
+    $name    	= $_POST['name'];
+    $mobile     = $_POST['mobile'];
+    $sql = "UPDATE member SET name = '{$name}',mobile = '{$mobile}' WHERE openid = '{$openid}'";
+    $db->query($sql);
+    $url_to = "main.php?action=gift_list";
+    url_locate($url_to, '添加成功');
+}
+
+//金币领取
 function receive(){
     global $db, $smarty;
      $openid = $_COOKIE['openid'];
@@ -90,10 +100,19 @@ function receive(){
     $addtime = now_time();
     $sql = "INSERT INTO receive (openid,nickname,merchant_id,merchant_name,gold,addtime) VALUES ('{$openid}', '{$mermber['nickname']}', '{$merchant['id']}', '{$merchant['name']}',{$gold},'{$addtime}')";
     $db->query($sql);
-	echo json_encode(1);
+	echo json_encode($mermber['gold']);
     exit;
     //$smarty->assign('signPackage',  $GLOBALS['signPackage']);
     //url_locate('main.php?action=index&receive=1', '领取成功');
+}
+
+function exchange(){
+    global $db, $smarty;
+    $id = irequest('id');
+    $sql = "SELECT * FROM gift WHERE id = '{$id}'";
+    $gift = $db->get_row($sql);
+    $smarty->assign('gift', $gift);
+    $smarty->display('exchange.html');
 }
 
 //兑换方法
@@ -102,17 +121,7 @@ function success(){
     $smarty->display('success.html');
 }
 
-function update_member(){
-    global $db, $smarty;
-    $openid = $_POST['openid'];
 
-    $name    	= $_POST['name'];
-    $mobile     = $_POST['mobile'];
-    $sql = "UPDATE member SET name = '{$name}',mobile = '{$mobile}' WHERE openid = '{$openid}'";
-    $db->query($sql);
-    $url_to = "main.php?action=gift_list";
-    url_locate($url_to, '添加成功');
-}
 
 function httpGet($url) {
     $curl = curl_init();
