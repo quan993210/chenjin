@@ -16,10 +16,10 @@ if(isset($_GET['openid']) && !empty($_GET['openid'])){
 $code = getCode();
 $access_token = getOpenId($code);
 $userInfo = getUserInfo($access_token);
-if ($userInfo) {
+if ($userInfo && !empty($userInfo) && isset($userInfo['openid']) && !empty($userInfo['openid'])) {
     $sql = "SELECT * FROM member WHERE openid = '{$userInfo['openid']}'";
     $member = $db->get_row($sql);
-    if($member){
+    if($member && !empty($member) && isset($member['openid']) && !empty($member['openid'])){
         $nickname    	= $userInfo['nickname'];
         $headimgurl    	= $userInfo['headimgurl'];
         $time = strtotime(date('Y-m-d 00:00:00',time()));
@@ -65,6 +65,8 @@ if ($userInfo) {
         setcookie("p_openid",'');
     }
     href_locate('main.php?action=index');
+}else{
+    href_locate(INDEX_URL);
 }
 
 
