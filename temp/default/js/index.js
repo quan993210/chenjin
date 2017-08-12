@@ -49,9 +49,12 @@ window.onload = function () {
     shareEl.style.display = 'none'
   })
 
-  addEvent(moreBtn, 'click', () => {
-    modules.style.display = 'block'
+  if(moreBtn){
+    addEvent(moreBtn, 'click', () => {
+      modules.style.display = 'block'
   })
+  }
+
   // 退出弹框
   addEvent(cancelBtn, 'click', () => {
     modules.style.display = 'none'

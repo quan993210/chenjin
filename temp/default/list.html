@@ -51,6 +51,24 @@
     </div>
     <!-- end 产品展示块 -->
   </div>
+  <script src="/ChildrenDay/temp/default/js/common.js"></script>
+  <script>
+    window.onload = function () {
+      let productList = document.querySelectorAll('.product-item'),
+              productModule = document.querySelector('.product-module')
+
+
+      for (let i = 0; i < productList.length; i++) {
+        addEvent(productList[i], 'click', () => {
+          productModule.style.display = 'block'
+      })
+      }
+
+      addEvent(productModule, 'click', () => {
+        productModule.style.display = 'none'
+    })
+    }
+  </script>
   <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
   <script>
     wx.config({
