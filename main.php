@@ -81,19 +81,20 @@ function update_member(){
     $sql = "UPDATE member SET name = '{$name}',mobile = '{$mobile}' WHERE openid = '{$openid}'";
     $db->query($sql);
     $url_to = "main.php?action=gift_list";
-    url_locate($url_to, '添加成功');
+    href_locate($url_to);
 }
 
 //金币领取
 function receive(){
     global $db, $smarty;
-     $openid = $_COOKIE['openid'];
+    $openid = $_COOKIE['openid'];
     $merchant_id = $_GET['merchant_id'];
+    $receive = $_GET['receive'];
     $sql = "SELECT * FROM member WHERE openid = '{$openid}'";
     $mermber 		= $db->get_row($sql);
     $sql 		= "SELECT * FROM merchant WHERE id='{$merchant_id}'";
     $merchant 		= $db->get_row($sql);
-    $gold = intval($mermber['receive'])*intval($merchant['gold']);
+    $gold = intval($receive)*intval($merchant['gold']);
     $mermber['gold'] = $mermber['gold'] + $gold;
     $sql = "UPDATE member SET gold = '{$mermber['gold']}',receive = 0 WHERE openid = '{$openid}'";
     $db->query($sql);

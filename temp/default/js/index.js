@@ -15,12 +15,13 @@ window.onload = function () {
       return ;
     } else {
       var merchant_id = getBtn[i].id;
+      var receive = getBtn[i].parentNode.id;
       if(window.XMLHttpRequest) {
         var oAjax = new XMLHttpRequest();//创建ajax对象
       }else{
         var oAjax = new ActiveXObject("Microsoft.XMLHTTP");//IE6浏览器创建ajax对象
       }
-      oAjax.open("GET","main.php?action=receive&merchant_id="+merchant_id,true);//加上t='+new Date().getTime()"的目的是为了消除缓存，每次的t的值不一样。
+      oAjax.open("GET","main.php?action=receive&merchant_id="+merchant_id+"&receive="+receive,true);//加上t='+new Date().getTime()"的目的是为了消除缓存，每次的t的值不一样。
       oAjax.send();
       oAjax.onreadystatechange=function() {
         if(oAjax.readyState==4)
@@ -31,12 +32,9 @@ window.onload = function () {
             getBtn[i].innerHTML = '领取成功';
             document.getElementById("gold").innerHTML=oAjax.responseText;
             music.play()
-            setTimeout(() => {
-              getEl.style.display = 'none'
-             }, 1500);
-            //setTimeout(window.location.href="http://tongwanjie.famishare.net/ChildrenDay/main.php?action=index", 2000);
+            setTimeout(() => {getEl.style.display = 'none'}, 1500);
           }else{
-            alert("失败");
+            console.log("失败");
           }
         }
       };
