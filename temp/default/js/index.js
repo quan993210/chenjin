@@ -12,6 +12,7 @@ window.onload = function () {
   for (let i = 0; i < getBtn.length; i++) {
     addEvent(getBtn[i], 'click', () => {
     if (getBtn[i].classList.contains('geted')) {
+      shareEl.style.display = 'block';
       return ;
     } else {
       var merchant_id = getBtn[i].id;
