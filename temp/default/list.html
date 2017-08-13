@@ -37,36 +37,40 @@
             </div>
          <!-- </a>-->
         </li>
+        <!-- 产品展示块 -->
+        <div class="product-module">
+          <div>
+            <img src="{$gift[loop].image}" alt="">
+            <p class="module-tip">
+              请您于8月19日-20日到红谷滩铜锣湾广场童玩节现场来兑换礼品，先到先得。
+            </p>
+          </div>
+        </div>
+        <!-- end 产品展示块 -->
         {/section}
       </ul>
     </div>
-    <!-- 产品展示块 -->
-    <div class="product-module">
-      <div>
-        <img src="/ChildrenDay/temp/default/images/thumb.png" alt="">
-        <p class="module-tip">
-          请您于8月19日-20日到红谷滩铜锣湾广场童玩节现场来兑换礼品，先到先得。
-        </p>
-      </div>
-    </div>
-    <!-- end 产品展示块 -->
+
   </div>
   <script src="/ChildrenDay/temp/default/js/common.js"></script>
   <script>
     window.onload = function () {
       let productList = document.querySelectorAll('.product-item'),
-              productModule = document.querySelector('.product-module')
+              productModule = document.querySelectorAll('.product-module')
 
 
       for (let i = 0; i < productList.length; i++) {
         addEvent(productList[i], 'click', () => {
-          productModule.style.display = 'block'
-      })
+          productModule[i].style.display = 'block'
+        })
+
       }
 
-      addEvent(productModule, 'click', () => {
-        productModule.style.display = 'none'
-    })
+      for (let i = 0; i < productModule.length; i++) {
+        addEvent(productModule[i], 'click', () => {
+          productModule[i].style.display = 'none'
+        })
+      }
     }
   </script>
   <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>

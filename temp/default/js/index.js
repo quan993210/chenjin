@@ -8,7 +8,7 @@ window.onload = function () {
       modules = document.querySelector('.modules'),
       cancelBtn = document.querySelector('.cancel'),
       productList = document.querySelectorAll('.product-item'),
-      productModule = document.querySelector('.product-module')
+      productModule = document.querySelectorAll('.product-module')
   for (let i = 0; i < getBtn.length; i++) {
     addEvent(getBtn[i], 'click', () => {
     if (getBtn[i].classList.contains('geted')) {
@@ -60,11 +60,16 @@ window.onload = function () {
 
   for (let i = 0; i < productList.length; i++) {
     addEvent(productList[i], 'click', () => {
-      productModule.style.display = 'block'
+      productModule[i].style.display = 'block'
+    })
+
+  }
+
+  for (let i = 0; i < productModule.length; i++) {
+    addEvent(productModule[i], 'click', () => {
+      productModule[i].style.display = 'none'
   })
   }
 
-  addEvent(productModule, 'click', () => {
-    productModule.style.display = 'none'
-})
+
 }
