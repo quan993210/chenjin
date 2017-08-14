@@ -1,6 +1,6 @@
 .list {
   width: 100%;
-  overflow: hidden;
+  overflow: auto;
   background-color: #f3f3f3;
 }
 
@@ -21,13 +21,14 @@
 .product {
   margin-top: .266667rem;
   background: #fff;
-  margin-bottom: .8rem;
+  padding-bottom: .8rem;
 }
 
 .product-item {
   display: flex;
   align-items: center;
-  height: 3.733333rem;
+  /* height: 3.733333rem; */
+  padding: .533333rem 0;
   width: 9.2rem;
   margin: 0 auto;
   border-bottom: 1px solid #eeeeee;
@@ -83,4 +84,20 @@
   font-size: .4rem;
   margin-top: .266667rem;
 }
+
+
+.rules-row .rules {
+  padding-bottom: .666667rem;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.rules-row .rules h2 {
+  margin-bottom: .533333rem;
+}
+
+.rules-row .rules .rule-item {
+  margin-bottom: .133333rem;
+  color: #565656;
+}
+
 

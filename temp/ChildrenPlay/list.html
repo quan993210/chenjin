@@ -16,14 +16,15 @@
   <div class="list">
     <div class="rules">
       <h2>兑换规则</h2>
-      <!-- 文案更改 -->
-      <ol class="rule-list">
-        <li class="rule-item">领取时间：2017年8月25日上午10:00至下午18:00</li>
-        <li class="rule-item">领奖地址：南昌市红谷滩铜锣湾广场1楼</li>
-        <li class="rule-item">兑换方式：选择你想要兑换的奖品，并在提供该奖品的相应商家处扫码兑换获取</li>
-        <li class="rule-item">特别提醒：奖品数量有限，先到先得</li>
-        <li class="rule-item">客服微信：kin2089 /mamyy08</li>
-      </ol>
+      <!-- 文案更改 new -->
+      <ul class="rule-list">
+        <li class="rule-item">1. 领取时间：2017年8月25日上午10:00至下午18:00</li>
+        <li class="rule-item">2. 领奖地址：南昌市红谷滩铜锣湾广场1楼</li>
+        <li class="rule-item">3. 兑换方式：选择你想要兑换的奖品，并在提供该奖品的相应商家处扫码兑换获取</li>
+        <li class="rule-item">4. 特别提醒：奖品数量有限，先到先得</li>
+        <li class="rule-item">5. 客服微信：kin2089 /mamyy08</li>
+        <li class="rule-item">(最终解释权由各参展商家所有)</li>
+      </ul>
       <!-- 结束 -->
     </div>
     <div class="product">
@@ -51,6 +52,20 @@
     <!-- end 产品展示块 -->
   </div>
   <script src="./js/common.js"></script>
-  <script src="./js/index.js"></script>
+  <script>
+    // 点击礼品弹出展示块 new
+    let productList = document.querySelectorAll('.product-item'),
+        productModule = document.querySelector('.product-module')
+
+    for (let i = 0; i < productList.length; i++) {
+      addEvent(productList[i], 'click', () => {
+        productModule.style.display = 'block'
+      })
+    }
+
+    addEvent(productModule, 'click', () => {
+      productModule.style.display = 'none'
+    })
+  </script>
 </body>
 </html>
