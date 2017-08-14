@@ -1,0 +1,136 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  background-color: #f3f3f3;
+}
+
+.home, .exchange, .list, .success {
+  max-width: 750px;
+  margin: 0 auto;
+  background-color: #fff;
+}
+
+ol {
+  list-style: decimal;
+}
+
+.btn {
+  display: block;
+  background-color: #ff0058;
+  color: #ffffff;
+  font-size: .293333rem;
+  width: 3.466667rem;
+  height: .933333rem;
+  line-height: .933333rem;
+  border-radius: 7px;
+  text-align: center;
+}
+
+.icon {
+  display: inline-block;
+  background: no-repeat;
+  background-size: contain;
+}
+
+.icon-coin {
+  width: .986667rem;
+  height: .986667rem;
+  background-image: url('../images/icon-coin.png');
+}
+
+.icon-coin-mini {
+  background-image: url('../images/icon-coin.png');
+  height: .426667rem;
+  width: .426667rem;
+}
+
+.rules {
+  padding-left: .4rem;
+}
+
+.rules h2 {
+  font-size: .4rem;
+  color: #383838;
+  margin-top: .586667rem;
+  margin-bottom: .533333rem;
+}
+
+ol {
+  list-style: aliceblue;
+  color: #555555;
+  font-size: .346667rem;
+}
+
+.rule-item {
+  line-height: .533333rem;
+  width: 8.693333rem;
+  overflow-wrap: break-word;
+  margin-left: .4rem;
+}
+
+.tip {
+  overflow: hidden;
+  width: 100%;
+  padding-bottom: 6.933333rem;
+}
+
+.tip img {
+  display: block;
+  margin: 0 auto;
+  margin-top: 1.2rem;
+}
+
+.tip .intro .thumb {
+  width: 3.946667rem;
+  height: auto;
+}
+
+.tip .intro .product-name {
+  font-size: .4rem;
+  color: #333333;
+  text-align: center;
+  margin-top: .666667rem;
+}
+
+.tip .intro .coin {
+  font-size: .613333rem;
+  text-align: center;
+  color: #ff0058;
+  margin-top: .693333rem;
+  margin-bottom: 1.066667rem;
+}
+
+.tip .btn {
+  width: 9.2rem;
+  margin: 0 auto;
+  height: 1.2rem;
+  font-size: .48rem;
+  line-height: 1.2rem;
+}
+
+.tip .icon-success {
+  width: 2.666667rem;
+  height: 2.666667rem;
+}
+
+.tip .intro .title {
+  font-size: .506667rem;
+  text-align: center;
+  color: #000000;
+  margin-top: .666667rem;
+  margin-bottom: .506667rem;
+}
+
+.tip .tip-text {
+  width: 7.466667rem;
+  margin: 0 auto;
+  color: #888888;
+  font: .373333rem;
+  text-align: center;
+  margin-bottom: 1.333333rem;
+}
+
+a:hover {
+  text-decoration: none;
+}
