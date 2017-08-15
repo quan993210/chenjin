@@ -25,6 +25,7 @@
   margin-top: .266667rem;
   background-color: #fff;
   overflow: auto;
+  overflow-x: hidden;
 }
 
 .box {

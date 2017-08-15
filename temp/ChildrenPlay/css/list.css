@@ -1,6 +1,7 @@
 .list {
   width: 100%;
   overflow: auto;
+  overflow-x: hidden;
   background-color: #f3f3f3;
 }
 
@@ -10,6 +11,7 @@
   background-size: 100%;
   background-position: left bottom;
   overflow: hidden;
+  overflow-x: hidden;
   padding-bottom: .8rem;
 }
 
@@ -38,6 +40,7 @@
   width: 2.933333rem;
   height: 2.933333rem;
   margin-right: .4rem;
+  flex-shrink : 0;
 }
 
 .product-item .intro .product-name {

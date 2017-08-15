@@ -21,8 +21,19 @@ window.onload = function () {
         }, 800)
       }
     })
+    addEvent(getBtn[i], 'touchend', () => {
+      if (getBtn[i].classList.contains('geted')) {
+        return ;
+      } else {
+        getEl.style.display = 'block'
+        getBtn[i].classList.add('geted')
+        music.play()
+        setTimeout(() => {
+          getEl.style.display = 'none'
+        }, 800)
+      }
+    })
   }
-  console.log(getBtn)
 
   addEvent(shareBtn, 'click', () => {
     shareEl.style.display = 'none'
@@ -43,11 +54,13 @@ window.onload = function () {
 
   for (let i = 0; i < productList.length; i++) {
     addEvent(productList[i], 'click', () => {
+      console.log('click')
       productModule.style.display = 'block'
     })
   }
 
   addEvent(productModule, 'click', () => {
+    console.log('click')
     productModule.style.display = 'none'
   })
 }

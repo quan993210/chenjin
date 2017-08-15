@@ -41,6 +41,18 @@ window.onload = function () {
       };
     }
   })
+    addEvent(getBtn[i], 'touchend', () => {
+      if (getBtn[i].classList.contains('geted')) {
+      return ;
+    } else {
+      getEl.style.display = 'block'
+      getBtn[i].classList.add('geted')
+      music.play()
+      setTimeout(() => {
+        getEl.style.display = 'none'
+    }, 800)
+    }
+  })
   }
   console.log(getBtn)
 

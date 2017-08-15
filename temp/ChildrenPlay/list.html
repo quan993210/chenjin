@@ -38,17 +38,27 @@
             <p class="coin"><span class="coin-num">2000</span>宝宝币</p>
           </div>
         </li>
+        <li class="product-item">
+          <img src="./images/thumb.png" alt="" class="thumb">
+          <div class="intro">
+            <h3 class="product-name">美赞成荷兰铂金版1段婴儿奶粉400g*1罐</h3>
+            <p class="customer-name">美赞成</p>
+            <p class="coin"><span class="coin-num">2000</span>宝宝币</p>
+          </div>
+        </li>
       </ul>
     </div>
     <!-- 产品展示块 -->
-    <div class="product-module">
-      <div>
-        <img src="./images/thumb.png" alt="">
-        <p class="module-tip">
-          请您于8月19日-20日到红谷滩铜锣湾广场童玩节现场来兑换礼品，先到先得。
-        </p>
+    <a class="product-module-a" href="javascript:;">
+      <div class="product-module">
+        <div>
+          <img src="./images/thumb.png" alt="">
+          <p class="module-tip">
+            请您于8月19日-20日到红谷滩铜锣湾广场童玩节现场来兑换礼品，先到先得。
+          </p>
+        </div>
       </div>
-    </div>
+    </a>
     <!-- end 产品展示块 -->
   </div>
   <script src="./js/common.js"></script>
@@ -59,11 +69,13 @@
 
     for (let i = 0; i < productList.length; i++) {
       addEvent(productList[i], 'click', () => {
+        console.log('click')
         productModule.style.display = 'block'
       })
     }
 
     addEvent(productModule, 'click', () => {
+      console.log('click')
       productModule.style.display = 'none'
     })
   </script>

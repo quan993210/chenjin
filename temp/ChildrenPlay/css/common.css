@@ -3,6 +3,7 @@ html, body {
   padding: 0;
   width: 100%;
   background-color: #f3f3f3;
+  overflow-x: hidden;
 }
 
 .home, .exchange, .list, .success {
