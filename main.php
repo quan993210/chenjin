@@ -109,14 +109,31 @@ function receive(){
 
 function exchange(){
     global $db, $smarty;
-    $id = irequest('id');
+    $openid = $_COOKIE['openid'];
+    $sql = "SELECT * FROM member WHERE openid = '{$openid}'";
+    $member 		= $db->get_row($sql);
+
+    $id = irequest('giftid');
     $sql = "SELECT * FROM gift WHERE id = '{$id}'";
     $gift = $db->get_row($sql);
+
+   /* if($member['gold'] >= $gift['buy_gold']){
+        $smarty->assign('exchange', 1);
+        //兑换开始
+        if(isset($_GET['doexchange']) && !empty($_GET['doexchange']) && $_GET['doexchange'] == 1){
+            $member['gold'] = $member['gold']-$gift['buy_gold'];
+            $sql = "UPDATE member SET gold = '{$member['gold']}' WHERE openid = '{$member['openid']}'";
+            $db->query($sql);
+            //TODO 添加兑换记录
+            href_locate('main.php?action=success');
+        }
+    }*/
+
     $smarty->assign('gift', $gift);
     $smarty->display('exchange.html');
 }
 
-//兑换方法
+//兑换成功
 function success(){
     global $db, $smarty;
     $smarty->display('success.html');

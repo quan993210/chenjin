@@ -64,9 +64,40 @@
       color: #000000;
     }
 
-    a.share {
+    a.shareel {
       color: #fd0158;
     }
+
+
+    .share {
+      position: fixed;
+      display: none;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, .7);
+      z-index: 100;
+    }
+
+    .share .bg {
+      width: 100%;
+      height: 100%;
+      background: url('images/share.png') no-repeat;
+      background-size: 100% auto;
+      background-position: right top;
+      overflow: hidden;
+    }
+
+    .share .btn {
+      width: 4rem;
+      font-size: .4rem;
+      margin: 0 auto;
+      margin-top: 3.2rem;
+    }
+
+
+
   </style>
 </head>
 <body>
@@ -74,29 +105,53 @@
     <div class="intro">
       <img src="{$gift.image}" alt="" class="thumb">
       <p class="product-name">{$gift.name}</p>
-      <p class="coin"><span class="coin-num">{$gift.gold}</span>宝宝币</p>
-      <a href="main.php?action=success&id={$gift.id}" class="btn btn-exchange">兑换</a>
+      <p class="coin"><span class="coin-num">{$gift.buy_gold}</span>宝宝币</p>
+      <a href="main.php?action=exchange&giftid={$gift.id}&doexchange=1" class="btn btn-exchange">兑换</a>
     </div>
   </div>
   <!-- 兑换失败时提示 -->
-  <div class="bg">
+  {if $exchange == 1}
+  <div class="bg" style="display: none;">
+  {else}
+    <div class="bg" style="display: block;">
+  {/if}
+
     <div class="fail">
       <h2 class="title">提示</h2>
       <p class="tip-text">您的宝宝币不足，分享可获得更多领取机会</p>
       <div class="btn-group">
         <a href="javascript:;" class="cancel">取消</a>
-        <a href="javascript:;" class="share">去分享</a>
+        <a href="javascript:;" class="shareel">去分享</a>
       </div>
     </div>
   </div>
+
+    <div class="share">
+      <div class="bg">
+        <a href="javascript:;" class="btn btn-share">好的</a>
+      </div>
+    </div>
+
   <script src="/ChildrenDay/temp/default/js/common.js"></script>
   <script>
     window.onload = function () {
       let tip = document.querySelector('.bg'),
-          cancelBtn = document.querySelector('.cancel')
+          cancelBtn = document.querySelector('.cancel'),
+              shareel = document.querySelector('.shareel'),
+           share = document.querySelector('.share'),
+              shareBtn = document.querySelector('.btn-share')
+
       addEvent(cancelBtn, 'click', () => {
         tip.style.display = 'none'
       })
+
+      addEvent(shareel, 'click', () => {
+        tip.style.display = 'none'
+        share.style.display = 'block';
+    })
+      addEvent(shareBtn, 'click', () => {
+        share.style.display = 'none'
+    })
     }
   </script>
 </body>
