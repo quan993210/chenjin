@@ -102,6 +102,17 @@ function gift_list()
     $total 		= $db->get_one($sql);
     $page     	= new page(array('total'=>$total, 'page_size'=>$page_size));
 
+    include "inc/plugin/phpqrcode.php";
+    foreach($arr as $key=>$val){
+        // 没有二维码图片的时候
+        if(!is_file($_SERVER['DOCUMENT_ROOT'] . "/ChildrenDay/upload/phpqrcode/gift-".$val['id'].".jpg")){
+            $value="http://tongwanjie.famishare.net/ChildrenDay/main.php?action=exchange&giftid=".$val['id'];
+            $errorCorrectionLevel = 'L';
+            $matrixPointSize = 4;
+            QRcode::png($value,$_SERVER['DOCUMENT_ROOT'] . "/ChildrenDay/upload/phpqrcode/gift-".$val['id'].".jpg", $errorCorrectionLevel, $matrixPointSize);
+        }
+    }
+
     $smarty->assign('gift_list'   ,   $arr);
     $smarty->assign('pageshow'    ,   $page->show(6));
     $smarty->assign('now_page'    ,   $page->now_page);
