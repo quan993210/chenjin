@@ -117,17 +117,26 @@ function exchange(){
     $sql = "SELECT * FROM gift WHERE id = '{$id}'";
     $gift = $db->get_row($sql);
 
-   /* if($member['gold'] >= $gift['buy_gold']){
+    if($member['gold'] >= $gift['buy_gold']){
         $smarty->assign('exchange', 1);
         //兑换开始
         if(isset($_GET['doexchange']) && !empty($_GET['doexchange']) && $_GET['doexchange'] == 1){
+            $sql = "SELECT * FROM exchange WHERE openid= '{$openid}' and gift_id = '{$id}'";
+            $exchange = $db->get_row($sql);
+            if($exchange && !empty($exchange)){
+                url_locate('main.php?action=index', '您已兑换该礼品，请勿重复兑换！');
+                exit;
+            }
             $member['gold'] = $member['gold']-$gift['buy_gold'];
             $sql = "UPDATE member SET gold = '{$member['gold']}' WHERE openid = '{$member['openid']}'";
             $db->query($sql);
-            //TODO 添加兑换记录
+            // 添加兑换记录
+            $addtime = now_time();
+            $sql = "INSERT INTO exchange (openid,nickname,merchant_id,merchant_name,gift_id,gift_name,gold,addtime) VALUES ('{$openid}', '{$member['nickname']}', '{$gift['merchant_id']}', '{$gift['merchant_name']}','{$gift['id']}','{$gift['name']}',{$gift['buy_gold']},'{$addtime}')";
+            $db->query($sql);
             href_locate('main.php?action=success');
         }
-    }*/
+    }
 
     $smarty->assign('gift', $gift);
     $smarty->display('exchange.html');
