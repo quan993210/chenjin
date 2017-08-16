@@ -55,6 +55,7 @@ function menu()
 	$sub[]  = array('url' => 'admin.php', 				'name' => '管理员管理');
 	$sub[]  = array('url' => 'member.php', 				'name' => '会员列表');
 	$sub[]  = array('url' => 'receive.php', 				'name' => '宝宝币领取列表');
+	$sub[]  = array('url' => 'exchange.php', 				'name' => '礼品兑换列表');
 	$menu[] = array('name' => '网站管理', 				'sub' => $sub);
 	
 	/*unset($sub);

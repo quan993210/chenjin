@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>{$page_title}</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="{$admin_temp_path}/css/general.css" rel="stylesheet" type="text/css" />
+<link href="{$admin_temp_path}/css/main.css" rel="stylesheet" type="text/css" />
+<script src="{$url_path}/js/jquery.js"></script>
+<script src="{$url_path}/js/utils.js"></script>
+<script src="{$admin_temp_path}/js/listtable.js"></script>
+{literal}
+<script>
+	function check()
+	{
+		if(confirm("您确认删除这些吗？"))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
+	function check_del(url)
+	{
+		if(confirm("您是否确认删除该用户！"))
+		{
+			location.href = url;
+		}
+		
+		
+		return;
+	}	
+</script>
+{/literal}
+</head>
+<h1>
+<span class="action-span1"><a href="">{$sys_name} 管理中心</a>  - {$page_title} </span>
+<div style="clear:both"></div>
+</h1>
+<body>
+<div class="form-div">
+  <form action="exchange.php" name="searchForm" onsubmit="">
+    <img src="{$admin_temp_path}/images/icon_search.gif" width="26" height="22" border="0" alt="SEARCH" />
+    关键字 <input type="text" name="keyword" id="keyword" value="{$keyword}"/>
+    <input type="submit" value="搜索" class="button" />
+  </form>
+</div>
+<form method="post" action="process.php?action=del_sel_exchange" name="listForm" onsubmit="return check()">
+<div class="list-div" id="listDiv">
+<table width="98%" border="0" align="center" cellpadding="0" cellspacing="1">
+    <tr align="center">
+	  <th width="5%"><input onclick='listTable.selectAll(this, "checkboxes")' type="checkbox" name="checkbox[]">编号</th>
+		<th width="15%">openid</td>
+		<th width="15%">昵称</td>
+      <th width="10%">商家id</td>
+		<th width="10%">商家名称</td>
+		<th width="10%">商家id</td>
+		<th width="10%">商家名称</td>
+		<th width="5%">宝宝币</td>
+      <th width="15%">兑换时间</td>
+    </tr>
+	{section name=loop loop=$exchange_list}
+		<tr align="center">
+		  <td><span><input name="checkboxes[]" type="checkbox" value="{$exchange_list[loop].userid}" />{$exchange_list[loop].userid}</span></td>
+			<td>{$exchange_list[loop].openid}</td>
+			<td>{$exchange_list[loop].nickname}</td>
+			<td>{$exchange_list[loop].merchant_id}</td>
+          <td>{$exchange_list[loop].merchant_name}</td>
+			<td>{$exchange_list[loop].gift_id}</td>
+			<td>{$exchange_list[loop].gift_name}</td>
+			<td>{$exchange_list[loop].gold}</td>
+          <td>{$exchange_list[loop].addtime}</td>
+		</tr>
+	{/section}
+    <tr>
+      <td>
+      	<!--<input type="submit" value="批量删除" id="btnSubmit" name="btnSubmit" class="button" disabled="true" />-->
+        <input type="hidden" value="{$now_page}" name="now_page"/>
+        <input type="hidden" value="{$admin_temp_path}" id="admin_temp_path"/>
+      </td>
+      <td colspan="10" align="right">&nbsp;&nbsp;&nbsp;&nbsp;{$pageshow}</td>
+    </tr>
+</table>
+</div>
+</form>
+</body>
+</html>
+<script language="JavaScript" src="{$admin_temp_path}/js/select.js"></script>
