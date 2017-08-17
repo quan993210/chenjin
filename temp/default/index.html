@@ -6,9 +6,9 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
   <title>夏季童玩节</title>
-  <link rel="stylesheet" type="text/css" href="/ChildrenDay/temp/default/css/common.css?version=2017081501">
-  <link rel="stylesheet" type="text/css" href="/ChildrenDay/temp/default/css/index.css?version=2017081501">
-  <link rel="stylesheet" type="text/css" href="/ChildrenDay/temp/default/css/list.css?version=2017081501">
+  <link rel="stylesheet" type="text/css" href="/ChildrenDay/temp/default/css/common.css?version=2017081701">
+  <link rel="stylesheet" type="text/css" href="/ChildrenDay/temp/default/css/index.css?version=2017081701">
+  <link rel="stylesheet" type="text/css" href="/ChildrenDay/temp/default/css/list.css?version=2017081701">
 </head>
 <body>
   <div class="home">
@@ -68,11 +68,7 @@
 
             {/section}
           </ul>
-          {if $member.mobile neq ''}
           <a href="main.php?action=gift_list" class="btn btn-more-no">查看更多可兑换礼品</a>
-          {else}
-          <a href="javascript:void (0)" class="btn btn-more">查看更多可兑换礼品</a>
-          {/if}
 
         </div>
       </div>
@@ -89,10 +85,16 @@
           {if $member.receive ==0}
                   <a href="javascript:void (0)" class="btn btn-get geted">
                     <i class="icon icon-coin-mini"></i>已领取</a>
-
               {else}
-                 <a href="javascript:void (0)" id="{$merchant[loop].id}" class="btn btn-get">
-                   <i class="icon icon-coin-mini"></i>{$merchant[loop].gold}x{$member.receive}</a>
+
+          {if $member.mobile neq ''}
+          <a href="javascript:void (0)" id="{$merchant[loop].id}" class="btn btn-get">
+            <i class="icon icon-coin-mini"></i>{$merchant[loop].gold}x{$member.receive}</a>
+          {else}
+          <a href="javascript:void (0)" class="btn btn-more">
+            <i class="icon icon-coin-mini"></i>{$merchant[loop].gold}x{$member.receive}</a>
+          {/if}
+
              {/if}
 
 
@@ -129,8 +131,8 @@
 
 
   <audio class="music" src="/ChildrenDay/temp/default/music/gold.mp3"></audio> 
-  <script src="/ChildrenDay/temp/default/js/common.js?version=2017081501"></script>
-  <script src="/ChildrenDay/temp/default/js/index.js?version=2017081501"></script>
+  <script src="/ChildrenDay/temp/default/js/common.js?version=2017081701"></script>
+  <script src="/ChildrenDay/temp/default/js/index.js?version=2017081701"></script>
   <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
   <script>
     wx.config({

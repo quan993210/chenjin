@@ -4,24 +4,12 @@ window.onload = function () {
       getBtn = document.querySelectorAll('.btn-get'),
       getEl = document.querySelector('.get'),
       music = document.querySelector('.music'),
-      moreBtn = document.querySelector('.btn-more'),
+      moreBtn = document.querySelectorAll('.btn-more'),
       modules = document.querySelector('.modules'),
       cancelBtn = document.querySelector('.cancel')
 
   for (let i = 0; i < getBtn.length; i++) {
     addEvent(getBtn[i], 'click', () => {
-      if (getBtn[i].classList.contains('geted')) {
-        return ;
-      } else {
-        getEl.style.display = 'block'
-        getBtn[i].classList.add('geted')
-        music.play()
-        setTimeout(() => {
-          getEl.style.display = 'none'
-        }, 800)
-      }
-    })
-    addEvent(getBtn[i], 'touchend', () => {
       if (getBtn[i].classList.contains('geted')) {
         return ;
       } else {
@@ -39,9 +27,13 @@ window.onload = function () {
     shareEl.style.display = 'none'
   })
 
-  addEvent(moreBtn, 'click', () => {
+  for (let i = 0; i < moreBtn.length; i++) {
+    addEvent(moreBtn[i], 'click', () => {
+      console.log(3333)
     modules.style.display = 'block'
-  })
+    })
+  }
+
 
   // 退出弹框
   addEvent(cancelBtn, 'click', () => {

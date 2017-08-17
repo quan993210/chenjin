@@ -80,8 +80,8 @@ function update_member(){
     $mobile     = $_POST['mobile'];
     $sql = "UPDATE member SET name = '{$name}',mobile = '{$mobile}' WHERE openid = '{$openid}'";
     $db->query($sql);
-    $url_to = "main.php?action=gift_list";
-    href_locate($url_to);
+    //$url_to = "main.php?action=gift_list";
+    url_locate('main.php?action=index', '提交成功，您可以领取宝宝币了！');
 }
 
 //金币领取

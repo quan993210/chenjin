@@ -4,7 +4,7 @@ window.onload = function () {
       getBtn = document.querySelectorAll('.btn-get'),
       getEl = document.querySelector('.get'),
       music = document.querySelector('.music'),
-      moreBtn = document.querySelector('.btn-more'),
+      moreBtn = document.querySelectorAll('.btn-more'),
       modules = document.querySelector('.modules'),
       cancelBtn = document.querySelector('.cancel'),
       productList = document.querySelectorAll('.product-item'),
@@ -41,18 +41,6 @@ window.onload = function () {
       };
     }
   })
-    addEvent(getBtn[i], 'touchend', () => {
-      if (getBtn[i].classList.contains('geted')) {
-      return ;
-    } else {
-      getEl.style.display = 'block'
-      getBtn[i].classList.add('geted')
-      music.play()
-      setTimeout(() => {
-        getEl.style.display = 'none'
-    }, 800)
-    }
-  })
   }
   console.log(getBtn)
 
@@ -60,9 +48,9 @@ window.onload = function () {
     shareEl.style.display = 'none'
   })
 
-  if(moreBtn){
-    addEvent(moreBtn, 'click', () => {
-      modules.style.display = 'block'
+  for (let i = 0; i < moreBtn.length; i++) {
+    addEvent(moreBtn[i], 'click', () => {
+    modules.style.display = 'block'
   })
   }
 
