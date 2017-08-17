@@ -139,12 +139,14 @@ function exchange(){
     }
 
     $smarty->assign('gift', $gift);
+    $smarty->assign('signPackage',  $GLOBALS['signPackage']);
     $smarty->display('exchange.html');
 }
 
 //兑换成功
 function success(){
     global $db, $smarty;
+    $smarty->assign('signPackage',  $GLOBALS['signPackage']);
     $smarty->display('success.html');
 }
 

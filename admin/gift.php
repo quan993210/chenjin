@@ -35,8 +35,8 @@ switch ($action)
     case "del_sel_gift":
         del_sel_gift();
         break;
-    case "cat_list":
-        cat_list();
+    case "get_qrcode":
+        get_qrcode();
         break;
     case "add_cat":
         add_cat();
@@ -108,7 +108,7 @@ function gift_list()
         if(!is_file($_SERVER['DOCUMENT_ROOT'] . "/ChildrenDay/upload/phpqrcode/gift-".$val['id'].".jpg")){
             $value="http://tongwanjie.famishare.net/ChildrenDay/main.php?action=exchange&giftid=".$val['id'];
             $errorCorrectionLevel = 'L';
-            $matrixPointSize = 4;
+            $matrixPointSize = 12;
             QRcode::png($value,$_SERVER['DOCUMENT_ROOT'] . "/ChildrenDay/upload/phpqrcode/gift-".$val['id'].".jpg", $errorCorrectionLevel, $matrixPointSize);
         }
     }
@@ -306,6 +306,16 @@ function upload_file($file)
     move_uploaded_file($file["tmp_name"], '../upload/gift/' . $file_name);
 
     return $file_name;
+}
+
+function get_qrcode()
+{
+    global $db, $smarty;
+    $id = irequest('id');
+    $sql = "SELECT * FROM " . PREFIX . "gift WHERE id = '{$id}'";
+    $gift = $db->get_row($sql);
+    $smarty->assign('gift', $gift);
+    $smarty->display('gift/image.htm');
 }
 
 

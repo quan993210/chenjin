@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>礼品二维码</title>
+    <style>
+        .tip img {
+            display: block;
+            margin: 0 auto;
+            margin-top: -10px;
+        }
+
+        .tip .intro .thumb {
+            width: 350px;
+            height: auto;
+        }
+
+        .tip .intro .product-name {
+            font-size: 24px;
+            color: #333333;
+            text-align: center;
+        }
+
+        .tip .intro .coin {
+            font-size: 24px;
+            text-align: center;
+            color: #ff0058;
+            margin-top: -10px;
+        }
+        .tip .intro .coin_iso {
+            font-size: 24px;
+            text-align: center;
+            margin-top: -10px;
+        }
+
+    </style>
+</head>
+
+<body>
+<div class="exchange tip">
+    <div class="intro" style="text-align:center">
+        <p class="product-name">{$gift.name}</p>
+        <p class="coin"><span class="coin-num">{$gift.buy_gold}</span>宝宝币</p>
+        <img src="/ChildrenDay/upload/phpqrcode/gift-{$gift.id}.jpg" alt="" class="thumb">
+        <p class="coin_iso"><span class="coin-num">没人限兑换一次</span></p>
+    </div>
+</div>
+</body>
+</html>
