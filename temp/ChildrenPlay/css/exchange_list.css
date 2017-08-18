@@ -1,0 +1,56 @@
+html, body {
+  background-color: #fff;
+}
+
+.exchange-wrapper {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.exchange-list {
+  overflow-x: hidden;
+  /* min-height: 17.333333rem; */
+  width: 100%;
+  background-color: #fff;
+}
+
+.exchange-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: .493333rem .4rem;
+  border-bottom: 1px solid #b9b9b9;
+}
+
+.exchange-item .exchange-name {
+  font-size: .4rem;
+  flex: 1;
+  margin-bottom: .133333rem;
+  color: #0d0d0d;
+}
+
+.exchange-item .exchange-time {
+  font-size: .24rem;
+  flex: 1;
+  color: #7d7d7d;
+}
+
+.exchange-item .price {
+  font-size: .426667rem;
+  color: #0d0d0d;
+}
+
+.havenot {
+  width: 100%;
+}
+
+.havenot p {
+  font-size: .4rem;
+  text-align: center;
+  margin-top: 1.653333rem;
+  margin-bottom: .906667rem;
+}
+
+.havenot .btn {
+  margin: 0 auto;
+}

@@ -50,10 +50,21 @@
   border: .066667rem solid #f4dae3;
 }
 
-.left .name {
+.left-box {
+  margin-left: .24rem; 
+}
+
+.left-box .name {
   font-size: .453333rem;
   font-weight: bold;
-  margin-left: .24rem;
+}
+
+.left-box .havegift {
+  display: block;
+  text-decoration: underline;
+  margin-top: .053333rem;
+  font-size: .4rem;
+  color: #ff0058;
 }
 
 .right {

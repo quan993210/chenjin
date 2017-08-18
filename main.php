@@ -36,6 +36,10 @@ switch ($action)
     case "receive":
         receive();
         break;
+    case "exchangeList":
+        exchangeList();
+        break;
+
 }
 
 //首页
@@ -141,6 +145,17 @@ function exchange(){
     $smarty->assign('gift', $gift);
     $smarty->assign('signPackage',  $GLOBALS['signPackage']);
     $smarty->display('exchange.html');
+}
+
+function exchangeList(){
+    global $db, $smarty;
+    $openid = $_COOKIE['openid'];
+    $sql = "SELECT * FROM exchange WHERE openid = '{$openid}'";
+    $exchangeList 		= $db->get_all($sql);
+    $smarty->assign('count', count($exchangeList));
+    $smarty->assign('exchangeList', $exchangeList);
+    $smarty->assign('signPackage',  $GLOBALS['signPackage']);
+    $smarty->display('exchangeList.html');
 }
 
 //兑换成功

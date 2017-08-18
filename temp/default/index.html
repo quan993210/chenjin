@@ -18,10 +18,15 @@
       </div>
       <div class="rules-row">
         <div class="box">
+          <!-- 这里做了修改 添加了入口 -->
           <div class="left">
             <img src="{$member.headimgurl}" alt="" class="avatar">
-            <span class="name">{$member.nickname}</span>
+            <div class="left-box">
+              <p class="name">{$member.nickname}</p>
+              <a href="main.php?action=exchangeList" class="havegift">我兑换过的礼品</a>
+            </div>
           </div>
+          <!-- end index.css样式也有修改，可以直接覆盖 -->
           <div class="right">
             <i class="icon icon-coin"></i>
             <span>宝宝币</span>

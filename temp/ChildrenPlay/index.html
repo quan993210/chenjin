@@ -18,20 +18,23 @@
       </div>
       <div class="rules-row">
         <div class="box">
+          <!-- 这里做了修改 添加了入口 -->
           <div class="left">
             <img src="./images/avatar.png" alt="" class="avatar">
-            <span class="name">杨思雨</span>
+            <div class="left-box">
+              <p class="name">杨思雨</p>
+              <a href="./exchangeList.html" class="havegift">我兑换过的礼品</a>
+            </div>
           </div>
+          <!-- end index.css样式也有修改，可以直接覆盖 -->
           <div class="right">
             <i class="icon icon-coin"></i>
             <span>宝宝币</span>
             <span class="coin-num">8888</span>
           </div>
         </div>
-        <!-- 宝宝币领取规则更改 new -->
         <div class="rules">
           <h2> 领取宝宝币规则</h2>
-          <!-- 文案更改 -->
           <ul class="rule-list">
             <li class="rule-item">活动时间：2017年8月14日至8月20日18:00</li>
             <li class="rule-item">领取规则：</li>
@@ -40,13 +43,10 @@
             <li class="rule-item">兑奖方式：活动当天凭宝宝币线下兑换领取</li>
             <li class="rule-item">(最终解释权由各参展商家所有)</li>
           </ul>
-          <!-- 结束 -->
         </div>
-        <!-- end -->
         <div class="product">
           <h2>宝宝币换礼品</h2>
           <ul class="product-list">
-            <!-- 列表页更改，去掉a标签 -->
             <li class="product-item">
               <img src="./images/thumb.png" alt="" class="thumb">
               <div class="intro">
@@ -72,19 +72,17 @@
               </div>
             </li>
           </ul>
-          <a href="javascript:;" class="btn btn-more-no">查看更多可兑换礼品</a>
+          <a href="javascript:;" class="btn btn-more">查看更多可兑换礼品</a>
         </div>
       </div>
     </header>
     <div class="container">
-      <!-- 添加提示 new -->
       <h2 class="title">合作商家 <span class="title-tip">（每天都可以领取宝宝币哦）</span></h2>
-      <!-- end -->
       <ul class="customer-list">
         <li class="customer-item">
           <img src="./images/logo.png" alt="" class="logo">
           <h3 class="name">妈妈应用官方平台</h3>
-          <a href="javascript:;" class="btn btn-more">
+          <a href="javascript:;" class="btn btn-get">
             <i class="icon icon-coin-mini"></i>
             100x2
           </a>

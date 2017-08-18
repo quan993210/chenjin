@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
+  <title>我兑换过的礼品</title>
+  <link rel="stylesheet" type="text/css" href="/ChildrenDay/temp/default/css/common.css">
+  <link rel="stylesheet" type="text/css" href="/ChildrenDay/temp/default/css/exchange_list.css">
+</head>
+<body>
+  <div class="exchange-wrapper">
+    {if $count > 0}
+    <!-- 有兑换过礼品时显示 -->
+    <ul class="exchange-list">
+      {section name=loop loop=$exchangeList}
+      <li class="exchange-item">
+        <div class="left">
+          <p class="exchange-name">{$exchangeList[loop].gift_name}</p>
+          <p class="exchange-time">{$exchangeList[loop].addtime}</p>
+        </div>
+        <div class="right">
+          <p class="price">- {$exchangeList[loop].gold}</p>
+        </div>
+      </li>
+      {/section}
+    </ul>  
+    <!-- end -->
+    {else}
+    <!-- 没有兑换过时显示 -->
+     <div class="havenot">
+      <p>您还没有兑换过礼品哦～</p>
+      <a class="btn" href="main.php?action=gift_list">看看有什么礼品</a>
+    </div> 
+    <!-- end -->
+    {/if}
+  </div>
+  <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+  <script>
+    wx.config({
+      debug: false,
+      appId: '{$signPackage.appId}',
+      timestamp:'{$signPackage.timestamp}',
+      nonceStr: '{$signPackage.nonceStr}',
+      signature: '{$signPackage.signature}',
+      jsApiList: [
+        // 所有要调用的 API 都要加到这个列表中
+        'onMenuShareTimeline',
+        'onMenuShareAppMessage'
+      ]
+    });
+    wx.ready(function(){
+      wx.onMenuShareTimeline({
+        title:'南昌夏季童玩节门票奖品免费领了！', // 分享标题
+        link: 'http://tongwanjie.famishare.net/ChildrenDay?openid='+'{$member.openid}', // 分享链接
+        imgUrl: 'http://tongwanjie.famishare.net/ChildrenDay/temp/default/images/webwxgetmsgimg.png', // 分享图标
+        desc:'妈妈应用夏季童玩节，8.19-8.20，铜锣湾广场1楼，我们不见不散！',
+        success: function () {
+          // 用户确认分享后执行的回调函数
+          //  alert("分享成功");
+        },
+        cancel: function () {
+          // 用户取消分享后执行的回调函数
+        }
+      });
+      wx.onMenuShareAppMessage({
+        title: '南昌夏季童玩节门票奖品免费领了！', // 分享标题
+        desc: '妈妈应用夏季童玩节，8.19-8.20，铜锣湾广场1楼，我们不见不散！', // 分享描述
+        link: 'http://tongwanjie.famishare.net/ChildrenDay?openid='+'{$member.openid}', // 分享链接
+        imgUrl: 'http://tongwanjie.famishare.net/ChildrenDay/temp/default/images/webwxgetmsgimg.png', // 分享图标
+        type: '', // 分享类型,music、video或link，不填默认为link
+        dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+        success: function () {
+          // 用户确认分享后执行的回调函数
+          //alert("分享成功");
+        },
+        cancel: function () {
+          // 用户取消分享后执行的回调函数
+        }
+      });
+
+
+    })
+  </script>
+</body>
+</html>
